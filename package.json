@@ -1,0 +1,15 @@
+{
+  "name": "graph-mocks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generate.js",
+  "scripts": {
+    "start": "node generate.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ora": "^5.4.1"
+  }
+}
