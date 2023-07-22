@@ -7,12 +7,22 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch generateProxyMocks",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/generate.js",
+            "program": "${workspaceFolder}/generateProxyMocks.js",
             "args": ["graph-docs-samples", "graph-sample-proxy-mocks.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch loadDataFromSandbox",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/loadDataFromSandbox.js",
+            "args": ["graph-sample-proxy-mocks.json", "graph-sample-proxy-mocks-sandbox.json"]
         }
     ]
 }

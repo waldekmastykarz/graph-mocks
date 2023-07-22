@@ -14,7 +14,7 @@ const { sanitizeUrl } = require('./sanitizeUrl');
 function initArgs() {
   const args = process.argv.slice(2);
   if (args.length < 2) {
-    console.error('Usage: node generate.js <path-to-graph-docs> <output-file> [v1.0|beta]');
+    console.error('Usage: node generateProxyMocks.js <path-to-graph-docs> <output-file> [v1.0|beta]');
     process.exit(1);
   }
 
@@ -402,6 +402,7 @@ function convertRequestResponseToProxyMock(requestResponse) {
   const { request, response } = requestResponse;
   const proxyMock = {
     url: request.url,
+    exampleUrl: request.originalUrl,
     method: request.method,
     responseCode: response.statusCode,
     responseHeaders: response.headers
