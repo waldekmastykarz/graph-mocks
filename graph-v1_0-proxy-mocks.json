@@ -1948,7 +1948,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/assignments/*/target/connectedOrganization/externalSponsors",
+      "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/assignments/*/target/connectedOrganization/internalSponsors",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -1964,7 +1964,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/assignments/*/target/connectedOrganization/internalSponsors",
+      "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/assignments/*/target/connectedOrganization/externalSponsors",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -3060,6 +3060,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationStrength/policies/*/combinationConfigurations/*",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationStrength/policies/*/combinationConfigurations/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -3076,12 +3082,6 @@
           "fido2"
         ]
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationStrength/policies/*/combinationConfigurations/*",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/templates?$select=name,description,id,scenarios&$filter=* * *",
@@ -3242,6 +3242,26 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationStrength/policies/*/combinationConfigurations",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.fido2CombinationConfiguration",
+        "id": "96cb1a17-e45e-4b4f-8b4b-4a9490d63d66",
+        "allowedAAGUIDs": [
+          "486c3b50-889c-480a-abc5-c04ef7c873e0",
+          "c042882f-a621-40c8-94d3-9cde3a826fed",
+          "ec454c08-4c77-4012-9d48-45f7f0fccdfb"
+        ],
+        "appliesToCombinations": [
+          "fido2"
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationStrength/policies/*/combinationConfigurations",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -3260,26 +3280,6 @@
               "fido2"
             ]
           }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationStrength/policies/*/combinationConfigurations",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.fido2CombinationConfiguration",
-        "id": "96cb1a17-e45e-4b4f-8b4b-4a9490d63d66",
-        "allowedAAGUIDs": [
-          "486c3b50-889c-480a-abc5-c04ef7c873e0",
-          "c042882f-a621-40c8-94d3-9cde3a826fed",
-          "ec454c08-4c77-4012-9d48-45f7f0fccdfb"
-        ],
-        "appliesToCombinations": [
-          "fido2"
         ]
       }
     },
@@ -3904,12 +3904,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/softwareOath",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/softwareOath",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -3930,6 +3924,12 @@
           "excludeTargets": []
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/softwareOath",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/softwareOath",
@@ -4723,46 +4723,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/*/runs/*/taskProcessingResults",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identityGovernance/lifecycleWorkflows/workflows('a977dbe8-0f3f-4ae6-b3a7-29e1010ac4cc')/runs('33bf1a9c-2b26-49b6-996f-ca416c518341')/taskProcessingResults",
-        "value": [
-          {
-            "completedDateTime": "2023-01-20T17:16:03.4863553Z",
-            "createdDateTime": "2023-01-20T17:16:00.9095011Z",
-            "id": "7a21089f-ec13-4e9c-997e-b31f4e59d41e",
-            "processingStatus": "completed",
-            "startedDateTime": "2023-01-20T17:16:02.8025169Z",
-            "failureReason": null,
-            "subject": {
-              "id": "1baa57fa-3c4e-4526-ba5a-db47a9df95f0"
-            },
-            "task": {
-              "category": "joiner,leaver",
-              "continueOnError": false,
-              "description": "Add user to selected groups",
-              "displayName": "Add User To Groups",
-              "executionSequence": 3,
-              "id": "c8dbaed8-3d23-4e5a-8f65-130767639667",
-              "isEnabled": true,
-              "taskDefinitionId": "22085229-5809-45e8-97fd-270d28d66910",
-              "arguments": [
-                {
-                  "name": "groupID",
-                  "value": "1624be55-d924-491e-ac72-401f6f961e4d"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/*/runs/*/userProcessingResults",
       "method": "GET",
       "responseCode": 200,
@@ -4800,6 +4760,46 @@
             "workflowVersion": 1,
             "subject": {
               "id": "8cdf25a8-c9d2-423e-a03d-3f39f03c3e97"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/*/runs/*/taskProcessingResults",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identityGovernance/lifecycleWorkflows/workflows('a977dbe8-0f3f-4ae6-b3a7-29e1010ac4cc')/runs('33bf1a9c-2b26-49b6-996f-ca416c518341')/taskProcessingResults",
+        "value": [
+          {
+            "completedDateTime": "2023-01-20T17:16:03.4863553Z",
+            "createdDateTime": "2023-01-20T17:16:00.9095011Z",
+            "id": "7a21089f-ec13-4e9c-997e-b31f4e59d41e",
+            "processingStatus": "completed",
+            "startedDateTime": "2023-01-20T17:16:02.8025169Z",
+            "failureReason": null,
+            "subject": {
+              "id": "1baa57fa-3c4e-4526-ba5a-db47a9df95f0"
+            },
+            "task": {
+              "category": "joiner,leaver",
+              "continueOnError": false,
+              "description": "Add user to selected groups",
+              "displayName": "Add User To Groups",
+              "executionSequence": 3,
+              "id": "c8dbaed8-3d23-4e5a-8f65-130767639667",
+              "isEnabled": true,
+              "taskDefinitionId": "22085229-5809-45e8-97fd-270d28d66910",
+              "arguments": [
+                {
+                  "name": "groupID",
+                  "value": "1624be55-d924-491e-ac72-401f6f961e4d"
+                }
+              ]
             }
           }
         ]
@@ -5285,6 +5285,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/voice",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/voice",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -5306,12 +5312,6 @@
           "isOfficePhoneAllowed": "true"
         }
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/voice",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/accessPackages/*/incompatibleGroups",
@@ -5599,12 +5599,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/sms",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/sms",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -5626,6 +5620,12 @@
           "excludeTargets": []
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/sms",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/sms",
@@ -7649,6 +7649,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/directory/customSecurityAttributeDefinitions/*/allowedValues/Alpine",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/directory/customSecurityAttributeDefinitions/*/allowedValues/Alpine",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -7659,12 +7665,6 @@
         "id": "Alpine",
         "isActive": true
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/directory/customSecurityAttributeDefinitions/*/allowedValues/Alpine",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationStrengthPolicies/*/updateAllowedCombinations",
@@ -8280,15 +8280,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessOrganizerActivityMinuteCounts(period=*)",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/octet-stream"
-      },
-      "responseBody": "Report Refresh Date,Report Date,Report Period,Audio/Video,Dial-in Microsoft,Dial-out Microsoft"
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessParticipantActivityUserCounts(period=*)",
       "method": "GET",
       "responseCode": 200,
@@ -8296,6 +8287,15 @@
         "Content-Type": "application/octet-stream"
       },
       "responseBody": "Report Refresh Date,Report Date,Report Period,IM,Audio/Video,App Sharing,Web,Dial-in/out 3rd Party"
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessOrganizerActivityMinuteCounts(period=*)",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/octet-stream"
+      },
+      "responseBody": "Report Refresh Date,Report Date,Report Period,Audio/Video,Dial-in Microsoft,Dial-out Microsoft"
     },
     {
       "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/noncustodialdatasources/applyHold",
@@ -8320,7 +8320,7 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationContextClassReferences/*",
-      "method": "DELETE",
+      "method": "PATCH",
       "responseCode": 204,
       "responseHeaders": {}
     },
@@ -8341,7 +8341,7 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/authenticationContextClassReferences/*",
-      "method": "PATCH",
+      "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
     },
@@ -10107,7 +10107,7 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/worksheets/*/charts/*/axes/valueAxis",
-      "method": "GET",
+      "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
         "Content-type": "application/json"
@@ -10120,7 +10120,7 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/worksheets/*/charts/*/axes/valueAxis",
-      "method": "PATCH",
+      "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
         "Content-type": "application/json"
@@ -12449,17 +12449,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/*/attachments/*/content",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "value": "An attachment for a Data Privacy message regarding your organization is available within Message Center. The contents of this attachment can be accessed within Message Center by a Global Administrator or someone designated as a Message Center Privacy Reader. Please sign in to Admin Center to view the details of this message in the Microsoft 365 Message center."
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews/*?$expand=issues",
       "method": "GET",
       "responseCode": 200,
@@ -12499,6 +12488,17 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/*/attachments/*/content",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "value": "An attachment for a Data Privacy message regarding your organization is available within Message Center. The contents of this attachment can be accessed within Message Center by a Global Administrator or someone designated as a Message Center Privacy Reader. Please sign in to Admin Center to view the details of this message in the Microsoft 365 Message center."
       }
     },
     {
@@ -13325,38 +13325,6 @@
       "responseBody": "Report Refresh Date,Under Limit,Warning Issued,Send Prohibited,Send/Receive Prohibited,Indeterminate,Report Date,Report Period"
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/custodians/*/siteSources",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/cases/ediscoveryCases('b0073e4e-4184-41c6-9eb7-8c8cc3e2288b')/custodians('0053a61a3b6c42738f7606791716a22a')/siteSources",
-        "value": [
-          {
-            "@odata.id": "https://graph.microsoft.com/v1.0/sites/169718e3-a8df-449d-bef4-ee09fe1ddc5d",
-            "displayName": "U.S. Sales",
-            "createdDateTime": "2022-05-23T02:35:42.926309Z",
-            "holdStatus": "applied",
-            "id": "169718e3-a8df-449d-bef4-ee09fe1ddc5d",
-            "createdBy": {
-              "application": null,
-              "user": {
-                "id": "c25c3914-f9f7-43ee-9cba-a25377e0cec6",
-                "displayName": null
-              }
-            },
-            "site": {
-              "webUrl": "https://m365x809305.sharepoint.com/sites/USSales",
-              "id": "169718e3-a8df-449d-bef4-ee09fe1ddc5d",
-              "createdDateTime": "2022-05-23T02:35:42.926309Z"
-            }
-          }
-        ]
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/custodians/*/userSources",
       "method": "GET",
       "responseCode": 200,
@@ -13413,6 +13381,44 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/custodians/*/siteSources",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/cases/ediscoveryCases('b0073e4e-4184-41c6-9eb7-8c8cc3e2288b')/custodians('0053a61a3b6c42738f7606791716a22a')/siteSources",
+        "value": [
+          {
+            "@odata.id": "https://graph.microsoft.com/v1.0/sites/169718e3-a8df-449d-bef4-ee09fe1ddc5d",
+            "displayName": "U.S. Sales",
+            "createdDateTime": "2022-05-23T02:35:42.926309Z",
+            "holdStatus": "applied",
+            "id": "169718e3-a8df-449d-bef4-ee09fe1ddc5d",
+            "createdBy": {
+              "application": null,
+              "user": {
+                "id": "c25c3914-f9f7-43ee-9cba-a25377e0cec6",
+                "displayName": null
+              }
+            },
+            "site": {
+              "webUrl": "https://m365x809305.sharepoint.com/sites/USSales",
+              "id": "169718e3-a8df-449d-bef4-ee09fe1ddc5d",
+              "createdDateTime": "2022-05-23T02:35:42.926309Z"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/custodians/*/updateIndex",
+      "method": "POST",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/custodians/*/userSources",
       "method": "POST",
       "responseCode": 201,
@@ -13440,12 +13446,6 @@
           }
         }
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/custodians/*/updateIndex",
-      "method": "POST",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/tables/*/columns?$top=5&$skip=5",
@@ -14368,7 +14368,7 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/names/*/range/format/borders/*",
-      "method": "GET",
+      "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
         "Content-type": "application/json"
@@ -14383,7 +14383,7 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/names/*/range/format/borders/*",
-      "method": "PATCH",
+      "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
         "Content-type": "application/json"
@@ -15141,6 +15141,27 @@
     },
     {
       "url": "https://graph.microsoft.com/beta/deviceAppManagement/enterpriseCodeSigningCertificates/*",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json",
+        "Content-Length": "439"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.enterpriseCodeSigningCertificate",
+        "id": "b20d3703-3703-b20d-0337-0db203370db2",
+        "content": "Y29udGVudA==",
+        "status": "provisioned",
+        "subjectName": "Subject Name value",
+        "subject": "Subject value",
+        "issuerName": "Issuer Name value",
+        "issuer": "Issuer value",
+        "expirationDateTime": "2016-12-31T23:57:57.2481234-08:00",
+        "uploadDateTime": "2016-12-31T23:58:46.5747426-08:00"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/beta/deviceAppManagement/enterpriseCodeSigningCertificates/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -15160,27 +15181,6 @@
           "expirationDateTime": "2016-12-31T23:57:57.2481234-08:00",
           "uploadDateTime": "2016-12-31T23:58:46.5747426-08:00"
         }
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/beta/deviceAppManagement/enterpriseCodeSigningCertificates/*",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json",
-        "Content-Length": "439"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.enterpriseCodeSigningCertificate",
-        "id": "b20d3703-3703-b20d-0337-0db203370db2",
-        "content": "Y29udGVudA==",
-        "status": "provisioned",
-        "subjectName": "Subject Name value",
-        "subject": "Subject value",
-        "issuerName": "Issuer Name value",
-        "issuer": "Issuer value",
-        "expirationDateTime": "2016-12-31T23:57:57.2481234-08:00",
-        "uploadDateTime": "2016-12-31T23:58:46.5747426-08:00"
       }
     },
     {
@@ -15589,12 +15589,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users/*/authentication/windowsHelloForBusinessMethods/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*/authentication/windowsHelloForBusinessMethods/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -15609,6 +15603,12 @@
           "keyStrength": "normal"
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*/authentication/windowsHelloForBusinessMethods/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/worksheets/*/range(address=*)",
@@ -16214,50 +16214,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/education/classes/*/assignments/*/submissions/*/return",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {},
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#educationSubmission",
-        "@odata.type": "#microsoft.graph.educationSubmission",
-        "status": "returned",
-        "submittedDateTime": "2021-09-03T18:20:11.2167718Z",
-        "unsubmittedDateTime": null,
-        "returnedDateTime": "2021-09-03T19:01:45.6526389Z",
-        "resourcesFolderUrl": "https://graph.microsoft.com/v1.0/drives/b!OPmUsPgnBUiMIXMxWcj3neC1xck6I5NIsnFxfrLdmXodJYOAkI7rTLhw7ME_e42J/items/01QTY63RKYRQDN3FDQWNA24OCLHBD5C2SH",
-        "id": "022fb52d-1278-d21f-e827-2221a6a3e516",
-        "recipient": {
-          "@odata.type": "#microsoft.graph.educationSubmissionIndividualRecipient",
-          "userId": "80cefd93-8d88-40e2-b5d3-67898383e226"
-        },
-        "submittedBy": {
-          "application": null,
-          "device": null,
-          "user": {
-            "id": "80cefd93-8d88-40e2-b5d3-67898383e226",
-            "displayName": null
-          }
-        },
-        "unsubmittedBy": {
-          "application": null,
-          "device": null,
-          "user": {
-            "id": null,
-            "displayName": null
-          }
-        },
-        "returnedBy": {
-          "application": null,
-          "device": null,
-          "user": {
-            "id": "f3a5344e-dbde-48b0-be24-b5b62a243836",
-            "displayName": null
-          }
-        }
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/education/classes/*/assignments/*/submissions/*/submit",
       "method": "POST",
       "responseCode": 200,
@@ -16296,6 +16252,50 @@
           "device": null,
           "user": {
             "id": null,
+            "displayName": null
+          }
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/education/classes/*/assignments/*/submissions/*/return",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {},
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#educationSubmission",
+        "@odata.type": "#microsoft.graph.educationSubmission",
+        "status": "returned",
+        "submittedDateTime": "2021-09-03T18:20:11.2167718Z",
+        "unsubmittedDateTime": null,
+        "returnedDateTime": "2021-09-03T19:01:45.6526389Z",
+        "resourcesFolderUrl": "https://graph.microsoft.com/v1.0/drives/b!OPmUsPgnBUiMIXMxWcj3neC1xck6I5NIsnFxfrLdmXodJYOAkI7rTLhw7ME_e42J/items/01QTY63RKYRQDN3FDQWNA24OCLHBD5C2SH",
+        "id": "022fb52d-1278-d21f-e827-2221a6a3e516",
+        "recipient": {
+          "@odata.type": "#microsoft.graph.educationSubmissionIndividualRecipient",
+          "userId": "80cefd93-8d88-40e2-b5d3-67898383e226"
+        },
+        "submittedBy": {
+          "application": null,
+          "device": null,
+          "user": {
+            "id": "80cefd93-8d88-40e2-b5d3-67898383e226",
+            "displayName": null
+          }
+        },
+        "unsubmittedBy": {
+          "application": null,
+          "device": null,
+          "user": {
+            "id": null,
+            "displayName": null
+          }
+        },
+        "returnedBy": {
+          "application": null,
+          "device": null,
+          "user": {
+            "id": "f3a5344e-dbde-48b0-be24-b5b62a243836",
             "displayName": null
           }
         }
@@ -17229,6 +17229,39 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/reviewSets/*/queries",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/cases/ediscoveryCases('58399dff-cebe-478f-b1af-d3227f1fd645')/reviewSets('273f11a1-17aa-419c-981d-ff10d33e420f')/queries/$entity",
+        "description": null,
+        "lastModifiedDateTime": "2022-05-29T23:39:51.3307953Z",
+        "contentQuery": "((Author=\"edison\"))",
+        "id": "fcb86cd1-50e0-427c-840e-ba6f087364e5",
+        "displayName": "My Query 1",
+        "createdDateTime": "2022-05-29T23:39:51.3307953Z",
+        "createdBy": {
+          "application": null,
+          "user": {
+            "id": "c25c3914-f9f7-43ee-9cba-a25377e0cec6",
+            "displayName": null,
+            "userPrincipalName": "c25c3914-f9f7-43ee-9cba-a25377e0cec6"
+          }
+        },
+        "lastModifiedBy": {
+          "application": null,
+          "user": {
+            "id": "c25c3914-f9f7-43ee-9cba-a25377e0cec6",
+            "displayName": null,
+            "userPrincipalName": "c25c3914-f9f7-43ee-9cba-a25377e0cec6"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/reviewSets/*/queries",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -17280,39 +17313,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/*/reviewSets/*/queries",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#security/cases/ediscoveryCases('58399dff-cebe-478f-b1af-d3227f1fd645')/reviewSets('273f11a1-17aa-419c-981d-ff10d33e420f')/queries/$entity",
-        "description": null,
-        "lastModifiedDateTime": "2022-05-29T23:39:51.3307953Z",
-        "contentQuery": "((Author=\"edison\"))",
-        "id": "fcb86cd1-50e0-427c-840e-ba6f087364e5",
-        "displayName": "My Query 1",
-        "createdDateTime": "2022-05-29T23:39:51.3307953Z",
-        "createdBy": {
-          "application": null,
-          "user": {
-            "id": "c25c3914-f9f7-43ee-9cba-a25377e0cec6",
-            "displayName": null,
-            "userPrincipalName": "c25c3914-f9f7-43ee-9cba-a25377e0cec6"
-          }
-        },
-        "lastModifiedBy": {
-          "application": null,
-          "user": {
-            "id": "c25c3914-f9f7-43ee-9cba-a25377e0cec6",
-            "displayName": null,
-            "userPrincipalName": "c25c3914-f9f7-43ee-9cba-a25377e0cec6"
-          }
-        }
       }
     },
     {
@@ -17777,6 +17777,14 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/*",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -17791,14 +17799,6 @@
         "isExternallyVisible": false,
         "createdDateTime": "2019-01-27T18:19:50.74Z",
         "modifiedDateTime": "2019-01-27T18:19:50.74Z"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/*",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {
-        "Content-Type": "application/json"
       }
     },
     {
@@ -17963,13 +17963,13 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/admin/edge/internetExplorerMode/siteLists/*/sites/*",
-      "method": "PATCH",
+      "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/admin/edge/internetExplorerMode/siteLists/*/sites/*",
-      "method": "DELETE",
+      "method": "PATCH",
       "responseCode": 204,
       "responseHeaders": {}
     },
@@ -18472,14 +18472,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/names/*/range/format/fill",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/names/*/range/format/font",
       "method": "GET",
       "responseCode": 200,
@@ -18509,6 +18501,14 @@
         "name": "name-value",
         "size": 99,
         "underline": "underline-value"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/names/*/range/format/fill",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
       }
     },
     {
@@ -19125,6 +19125,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/identitySecurityDefaultsEnforcementPolicy",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/identitySecurityDefaultsEnforcementPolicy",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -19137,12 +19143,6 @@
         "id": "00000000-0000-0000-0000-000000000005",
         "isEnabled": true
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/identitySecurityDefaultsEnforcementPolicy",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1/reports/managedDeviceEnrollmentTopFailures(period=*)",
@@ -19483,6 +19483,25 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users/*/authentication/temporaryAccessPassMethods",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.temporaryAccessPassAuthenticationMethod",
+        "id": "6f1967b7-15e8-4935-ac26-d50770ed07a7",
+        "temporaryAccessPass": "+drkzqAD",
+        "createdDateTime": "2022-06-02T16:21:09.765173Z",
+        "startDateTime": "2022-06-05T00:00:00Z",
+        "lifetimeInMinutes": 60,
+        "isUsableOnce": false,
+        "isUsable": false,
+        "methodUsabilityReason": "NotYetValid"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*/authentication/temporaryAccessPassMethods",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -19502,25 +19521,6 @@
             "methodUsabilityReason": "NotYetValid"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*/authentication/temporaryAccessPassMethods",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.temporaryAccessPassAuthenticationMethod",
-        "id": "6f1967b7-15e8-4935-ac26-d50770ed07a7",
-        "temporaryAccessPass": "+drkzqAD",
-        "createdDateTime": "2022-06-02T16:21:09.765173Z",
-        "startDateTime": "2022-06-05T00:00:00Z",
-        "lifetimeInMinutes": 60,
-        "isUsableOnce": false,
-        "isUsable": false,
-        "methodUsabilityReason": "NotYetValid"
       }
     },
     {
@@ -19616,12 +19616,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/tenantRelationships/delegatedAdminRelationships/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/tenantRelationships/delegatedAdminRelationships/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -19657,6 +19651,12 @@
         "activatedDateTime": "2022-02-10T11:26:44.9941884Z",
         "endDateTime": "2024-02-10T11:24:42.3148266Z"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/tenantRelationships/delegatedAdminRelationships/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/tenantRelationships/delegatedAdminRelationships/*",
@@ -20046,24 +20046,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/deviceManagement/telecomExpenseManagementPartners",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json",
-        "Content-Length": "297"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.telecomExpenseManagementPartner",
-        "id": "47a3b399-b399-47a3-99b3-a34799b3a347",
-        "displayName": "Display Name value",
-        "url": "Url value",
-        "appAuthorized": true,
-        "enabled": true,
-        "lastConnectionDateTime": "2016-12-31T23:58:36.6670033-08:00"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/deviceManagement/telecomExpenseManagementPartners",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -20082,6 +20064,24 @@
             "lastConnectionDateTime": "2016-12-31T23:58:36.6670033-08:00"
           }
         ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/deviceManagement/telecomExpenseManagementPartners",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json",
+        "Content-Length": "297"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.telecomExpenseManagementPartner",
+        "id": "47a3b399-b399-47a3-99b3-a34799b3a347",
+        "displayName": "Display Name value",
+        "url": "Url value",
+        "appAuthorized": true,
+        "enabled": true,
+        "lastConnectionDateTime": "2016-12-31T23:58:36.6670033-08:00"
       }
     },
     {
@@ -20996,15 +20996,6 @@
       "responseBody": "Report Refresh Date,Mail For Mac,Outlook For Mac,Outlook For Windows,Outlook For Mobile,Other For Mobile,Outlook For Web,POP3 App,IMAP4 App,SMTP App,Report Period"
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/reports/getTeamsUserActivityUserCounts(period=*)",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/octet-stream"
-      },
-      "responseBody": "Report Refresh Date,Report Date,Team Chat Messages,Private Chat Messages,Calls,Meetings,Other Actions,Report Period"
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/reports/getTeamsUserActivityUserDetail(period=*)",
       "method": "GET",
       "responseCode": 200,
@@ -21012,6 +21003,15 @@
         "Content-Type": "application/octet-stream"
       },
       "responseBody": "Report Refresh Date,Tenant Display Name,Shared Channel Tenant Display Names,User Id,User Principal Name,Last Activity Date,Is Deleted,Deleted Date,Assigned Products,Team Chat Message Count,Private Chat Message Count,Call Count,Meeting Count,Post Messages,Reply Messages,Urgent Messages,Meetings Organized Count,Meetings Attended Count,Ad Hoc Meetings Organized Count,Ad Hoc Meetings Attended Count,Scheduled One-time Meetings Organized Count,Scheduled One-time Meetings Attended Count,Scheduled Recurring Meetings Organized Count,Scheduled Recurring Meetings Attended Count,Audio Duration,Video Duration,Screen Share Duration,Audio Duration In Seconds,Video Duration In Seconds,Screen Share Duration In Seconds,Has Other Action,Is Licensed,Report Period"
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/reports/getTeamsUserActivityUserCounts(period=*)",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/octet-stream"
+      },
+      "responseBody": "Report Refresh Date,Report Date,Team Chat Messages,Private Chat Messages,Calls,Meetings,Other Actions,Report Period"
     },
     {
       "url": "https://graph.microsoft.com/v1.0/reports/getYammerDeviceUsageUserCounts(period=*)",
@@ -21806,7 +21806,7 @@
       "responseHeaders": {}
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityFileCounts(period=*)",
+      "url": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityUserCounts(period=*)",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -21815,7 +21815,7 @@
       "responseBody": "Report Refresh Date,Viewed Or Edited,Synced,Shared Internally,Shared Externally,Report Date,Report Period"
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityUserCounts(period=*)",
+      "url": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityFileCounts(period=*)",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -21878,6 +21878,14 @@
       "responseBody": "Report Refresh Date,User Id,User Principal Name,Last Activity Date,Is Deleted,Deleted Date,Used Web,Used Windows Phone,Used iOS,Used Mac,Used Android Phone,Used Windows,Used Chrome OS,Used Linux,Is Licensed,Report Period"
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityDetail(period=*)",
+      "method": "GET",
+      "responseCode": 302,
+      "responseHeaders": {
+        "Location": "https://reports.office.com/data/download/JDFKdf2_eJXKS034dbc7e0t__XDe"
+      }
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityCounts(period=*)",
       "method": "GET",
       "responseCode": 200,
@@ -21885,14 +21893,6 @@
         "Content-Type": "application/octet-stream"
       },
       "responseBody": "Report Refresh Date,Liked,Posted,Read,Report Date,Report Period"
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityDetail(period=*)",
-      "method": "GET",
-      "responseCode": 302,
-      "responseHeaders": {
-        "Location": "https://reports.office.com/data/download/JDFKdf2_eJXKS034dbc7e0t__XDe"
-      }
     },
     {
       "url": "https://graph.microsoft.com/v1.0/security/threatIntelligence/articleIndicators/*",
@@ -23175,15 +23175,6 @@
       "responseBody": "Report Refresh Date,Site Type,Page View Count,Report Date,Report Period"
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/reports/getYammerActivityUserCounts(period=*)",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/octet-stream"
-      },
-      "responseBody": "Report Refresh Date,Liked,Posted,Read,Report Date,Report Period"
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/reports/getYammerActivityUserDetail(period=*)",
       "method": "GET",
       "responseCode": 200,
@@ -23191,6 +23182,15 @@
         "Content-Type": "application/octet-stream"
       },
       "responseBody": "Report Refresh Date,User Principal Name,Display Name,User State,State Change Date,Last Activity Date,Posted Count,Read Count,Liked Count,Assigned Products,Report Period"
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/reports/getYammerActivityUserCounts(period=*)",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/octet-stream"
+      },
+      "responseBody": "Report Refresh Date,Liked,Posted,Read,Report Date,Report Period"
     },
     {
       "url": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityDetail(date=*)",
@@ -23319,13 +23319,13 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/tables/*/sort/apply",
+      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/tables/*/sort/clear",
       "method": "POST",
       "responseCode": 200,
       "responseHeaders": {}
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/tables/*/sort/clear",
+      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/tables/*/sort/apply",
       "method": "POST",
       "responseCode": 200,
       "responseHeaders": {}
@@ -23641,6 +23641,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/*/staffMembers/*",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/*/staffMembers/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -23713,12 +23719,6 @@
         ],
         "isEmailNotificationEnabled": false
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/*/staffMembers/*",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/communications/calls/*/cancelMediaProcessing",
@@ -24434,6 +24434,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations/*",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -24458,12 +24464,6 @@
         ],
         "includeUnknownCountriesAndRegions": true
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations/*",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/*",
@@ -25258,6 +25258,12 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/servicePrincipals/*/synchronization/secrets",
+      "method": "PUT",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/swapShiftsChangeRequests/*",
       "method": "GET",
       "responseCode": 200,
@@ -25280,12 +25286,6 @@
         "managerActionDateTime": "2019-05-01T12:00:00Z",
         "managerActionMessage": "Approved!"
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/servicePrincipals/*/synchronization/secrets",
-      "method": "PUT",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/workbook/tables/*/rows/add",
@@ -25328,12 +25328,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identityGovernance/termsOfUse/agreements/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identityGovernance/termsOfUse/agreements/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -25348,6 +25342,12 @@
         "isViewingBeforeAcceptanceRequired": false,
         "isPerDeviceAcceptanceRequired": false
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identityGovernance/termsOfUse/agreements/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identityGovernance/termsOfUse/agreements/*",
@@ -26021,12 +26021,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/education/classes/*/assignmentCategories/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/education/classes/*/assignmentCategories/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -26039,7 +26033,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/beta/identity/*/*/userAttributeAssignments/City",
+      "url": "https://graph.microsoft.com/v1.0/education/classes/*/assignmentCategories/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -26066,6 +26060,12 @@
           }
         ]
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/beta/identity/*/*/userAttributeAssignments/City",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/GetNotebookFromWebUrl",
@@ -26359,12 +26359,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -26379,7 +26373,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleDefinitions/*",
+      "url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -26420,6 +26414,12 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleDefinitions/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/policies/roleManagementPolicyAssignments/*",
       "method": "GET",
       "responseCode": 200,
@@ -26433,6 +26433,23 @@
         "scopeId": "/",
         "scopeType": "Directory",
         "roleDefinitionId": "62e90394-69f5-4237-9190-012177145e10"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*?$select=ext55gb1l09_msLearnCourses",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(ext55gb1l09_msLearnCourses)/$entity",
+        "ext55gb1l09_msLearnCourses": {
+          "@odata.type": "#microsoft.graph.ComplexExtensionValue",
+          "courseType": "Developer",
+          "courseName": "Introduction to Microsoft Graph",
+          "courseId": 1
+        }
       }
     },
     {
@@ -26456,23 +26473,6 @@
         },
         "internalReplyMessage": "<html>\n<body>\n<p>I'm at our company's worldwide reunion and will respond to your message as soon as I return.<br>\n</p></body>\n</html>\n",
         "externalReplyMessage": "<html>\n<body>\n<p>I'm at the Contoso worldwide reunion and will respond to your message as soon as I return.<br>\n</p></body>\n</html>\n"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*?$select=ext55gb1l09_msLearnCourses",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(ext55gb1l09_msLearnCourses)/$entity",
-        "ext55gb1l09_msLearnCourses": {
-          "@odata.type": "#microsoft.graph.ComplexExtensionValue",
-          "courseType": "Developer",
-          "courseName": "Introduction to Microsoft Graph",
-          "courseId": 1
-        }
       }
     },
     {
@@ -26501,13 +26501,13 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/applications/*/tokenIssuancePolicies/$ref",
+      "url": "https://graph.microsoft.com/v1.0/applications/*/tokenLifetimePolicies/$ref",
       "method": "POST",
       "responseCode": 204,
       "responseHeaders": {}
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/applications/*/tokenLifetimePolicies/$ref",
+      "url": "https://graph.microsoft.com/v1.0/applications/*/tokenIssuancePolicies/$ref",
       "method": "POST",
       "responseCode": 204,
       "responseHeaders": {}
@@ -26972,12 +26972,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/linkedResources/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/linkedResources/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -26993,6 +26987,12 @@
           "externalId": "dk9cddce2-dce2-f9dd-e2dc-cdf9e2dccdf9"
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/linkedResources/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/linkedResources/*",
@@ -28271,6 +28271,15 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/reports/getEmailActivityCounts(period=*)",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/octet-stream"
+      },
+      "responseBody": "Report Refresh Date,Send,Receive,Read,Meeting Created,Meeting Interacted,Report Date,Report Period"
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments",
       "method": "POST",
       "responseCode": 201,
@@ -28313,15 +28322,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/reports/getEmailActivityCounts(period=*)",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/octet-stream"
-      },
-      "responseBody": "Report Refresh Date,Send,Receive,Read,Meeting Created,Meeting Interacted,Report Date,Report Period"
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/reports/getMailboxUsageStorage(period=*)",
       "method": "GET",
       "responseCode": 200,
@@ -28335,6 +28335,31 @@
       "method": "POST",
       "responseCode": 202,
       "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/*/sectionGroups",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "sectionsUrl": "sectionsUrl-value",
+        "sectionGroupsUrl": "sectionGroupsUrl-value",
+        "displayName": "name-value",
+        "createdBy": {
+          "user": {
+            "id": "id-value",
+            "displayName": "displayName-value"
+          }
+        },
+        "lastModifiedBy": {
+          "user": {
+            "id": "id-value",
+            "displayName": "displayName-value"
+          }
+        }
+      }
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/*/sectionGroups",
@@ -28363,31 +28388,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/*/sectionGroups",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "sectionsUrl": "sectionsUrl-value",
-        "sectionGroupsUrl": "sectionGroupsUrl-value",
-        "displayName": "name-value",
-        "createdBy": {
-          "user": {
-            "id": "id-value",
-            "displayName": "displayName-value"
-          }
-        },
-        "lastModifiedBy": {
-          "user": {
-            "id": "id-value",
-            "displayName": "displayName-value"
-          }
-        }
       }
     },
     {
@@ -28699,6 +28699,29 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationStrengthPolicies",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "authenticationStrengthPolicy",
+        "id": "dd055c42-4218-4281-8631-f090e171f5cd",
+        "createdDateTime": "2022-09-30T10:59:01Z",
+        "modifiedDateTime": "2022-09-30T10:59:01Z",
+        "displayName": "Contoso authentication level",
+        "description": "The only authentication level allowed to access our secret apps",
+        "policyType": "custom",
+        "requirementsSatisfied": "mfa",
+        "allowedCombinations": [
+          "password, hardwareOath",
+          "password, sms"
+        ],
+        "combinationConfigurations": []
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/authenticationStrengthPolicies",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -28773,29 +28796,6 @@
             "combinationConfigurations": []
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/authenticationStrengthPolicies",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "authenticationStrengthPolicy",
-        "id": "dd055c42-4218-4281-8631-f090e171f5cd",
-        "createdDateTime": "2022-09-30T10:59:01Z",
-        "modifiedDateTime": "2022-09-30T10:59:01Z",
-        "displayName": "Contoso authentication level",
-        "description": "The only authentication level allowed to access our secret apps",
-        "policyType": "custom",
-        "requirementsSatisfied": "mfa",
-        "allowedCombinations": [
-          "password, hardwareOath",
-          "password, sms"
-        ],
-        "combinationConfigurations": []
       }
     },
     {
@@ -29946,21 +29946,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users/*/calendar/calendarPermissions/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*/calendar/calendarPermissions/*",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": "{\n  \"emailAddress\": {\n    \"name\": \"My Organization\",\n  },\n  \"isRemovable\": false,\n  \"isInsideOrganization\": true,\n  \"role\": \"write\",\n  \"allowedRoles\": [\n    \"none\",\n    \"freeBusyRead\",\n    \"limitedRead\",\n    \"read\",\n    \"write\"\n  ],\n  \"id\": \"RGVmYXVsdA==\"\n}"
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*/calendar/calendarPermissions/*",
       "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
@@ -29982,6 +29967,21 @@
           "address": "AdeleV@contoso.OnMicrosoft.com"
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*/calendar/calendarPermissions/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*/calendar/calendarPermissions/*",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": "{\n  \"emailAddress\": {\n    \"name\": \"My Organization\",\n  },\n  \"isRemovable\": false,\n  \"isInsideOrganization\": true,\n  \"role\": \"write\",\n  \"allowedRoles\": [\n    \"none\",\n    \"freeBusyRead\",\n    \"limitedRead\",\n    \"read\",\n    \"write\"\n  ],\n  \"id\": \"RGVmYXVsdA==\"\n}"
     },
     {
       "url": "https://graph.microsoft.com/v1.0/communications/calls/*/subscribeToTone",
@@ -30446,12 +30446,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides/*",
       "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
@@ -30467,7 +30461,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1/deviceManagement/troubleshootingEvents/*",
+      "url": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -30488,6 +30482,12 @@
           "correlationId": "Correlation Id value"
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1/deviceManagement/troubleshootingEvents/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1/deviceManagement/troubleshootingEvents/*",
@@ -31454,14 +31454,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/external/connections/contosohr/schema",
-      "method": "POST",
-      "responseCode": 202,
-      "responseHeaders": {
-        "Location": "https://graph.microsoft.com/v1.0/external/connections/contosohr/operations/616bfeed-666f-4ce0-8cd9-058939010bfc"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/external/connections/contosohr/schema",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -31495,6 +31487,14 @@
             }
           ]
         }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/external/connections/contosohr/schema",
+      "method": "POST",
+      "responseCode": 202,
+      "responseHeaders": {
+        "Location": "https://graph.microsoft.com/v1.0/external/connections/contosohr/operations/616bfeed-666f-4ce0-8cd9-058939010bfc"
       }
     },
     {
@@ -31615,6 +31615,26 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/organization/*/branding/localizations",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#organization('d69179bf-f4a4-41a9-a9de-249c0f2efb1d')/branding/localizations/$entity",
+        "@odata.id": "https://graph.microsoft.com/v2/d69179bf-f4a4-41a9-a9de-249c0f2efb1d/directoryObjects/$/Microsoft.DirectoryServices.Organization('d69179bf-f4a4-41a9-a9de-249c0f2efb1d')//localizations/fr-FR",
+        "id": "fr-FR",
+        "backgroundColor": "",
+        "backgroundImageRelativeUrl": null,
+        "bannerLogoRelativeUrl": null,
+        "cdnList": [],
+        "signInPageText": " ",
+        "squareLogoRelativeUrl": null,
+        "usernameHintText": ""
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/organization/*/branding/localizations",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -31650,26 +31670,6 @@
             "usernameHintText": "hint"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/organization/*/branding/localizations",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#organization('d69179bf-f4a4-41a9-a9de-249c0f2efb1d')/branding/localizations/$entity",
-        "@odata.id": "https://graph.microsoft.com/v2/d69179bf-f4a4-41a9-a9de-249c0f2efb1d/directoryObjects/$/Microsoft.DirectoryServices.Organization('d69179bf-f4a4-41a9-a9de-249c0f2efb1d')//localizations/fr-FR",
-        "id": "fr-FR",
-        "backgroundColor": "",
-        "backgroundImageRelativeUrl": null,
-        "bannerLogoRelativeUrl": null,
-        "cdnList": [],
-        "signInPageText": " ",
-        "squareLogoRelativeUrl": null,
-        "usernameHintText": ""
       }
     },
     {
@@ -31727,18 +31727,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/planner/tasks/*/bucketTaskBoardFormat",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "id": "01gzSlKkIUSUl6DF_EilrmQAKDhh",
-        "orderHint": "85752723360752+"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/planner/tasks/*/bucketTaskBoardFormat",
       "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
@@ -31747,6 +31735,18 @@
       "responseBody": {
         "id": "hsOf2dhOJkqyYYZEtdzDe2QAIUCR",
         "orderHint": "C3665D"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/planner/tasks/*/bucketTaskBoardFormat",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "id": "01gzSlKkIUSUl6DF_EilrmQAKDhh",
+        "orderHint": "85752723360752+"
       }
     },
     {
@@ -31993,12 +31993,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/attachments/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/attachments/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -32015,6 +32009,12 @@
           "contentBytes": "UEsDBBQABgAIAAAAIQ4AAAAA"
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks/*/attachments/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/beta/me/mailFolders?includehiddenfolders=*",
@@ -32071,26 +32071,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/applications/*/tokenIssuancePolicies",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "value": [
-          {
-            "definition": [
-              "definition-value"
-            ],
-            "displayName": "displayName-value",
-            "isOrganizationDefault": true,
-            "id": "id-value"
-          }
-        ]
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/applications/*/tokenLifetimePolicies",
       "method": "GET",
       "responseCode": 200,
@@ -32108,6 +32088,26 @@
             ],
             "displayName": "Contoso token lifetime policy",
             "isOrganizationDefault": true
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/applications/*/tokenIssuancePolicies",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "value": [
+          {
+            "definition": [
+              "definition-value"
+            ],
+            "displayName": "displayName-value",
+            "isOrganizationDefault": true,
+            "id": "id-value"
           }
         ]
       }
@@ -32420,6 +32420,25 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/employeeExperience/learningProviders",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#learningProviders/$entity",
+        "id": "ba9790ef-21d5-4c17-808c-acda55230253",
+        "displayName": "Microsoft",
+        "squareLogoWebUrlForDarkTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
+        "longLogoWebUrlForDarkTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
+        "squareLogoWebUrlForLightTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
+        "longLogoWebUrlForLightTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
+        "loginWebUrl": "https://www.linkedin.com/learning-login/teams",
+        "isCourseActivitySyncEnabled": true
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/employeeExperience/learningProviders",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -32452,31 +32471,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/employeeExperience/learningProviders",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#learningProviders/$entity",
-        "id": "ba9790ef-21d5-4c17-808c-acda55230253",
-        "displayName": "Microsoft",
-        "squareLogoWebUrlForDarkTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
-        "longLogoWebUrlForDarkTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
-        "squareLogoWebUrlForLightTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
-        "longLogoWebUrlForLightTheme": "https://support.content.office.net/en-us/media/4c531d12-4c13-4782-a6e4-4b8f991801a3.png",
-        "loginWebUrl": "https://www.linkedin.com/learning-login/teams",
-        "isCourseActivitySyncEnabled": true
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/applications/*/extensionProperties/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/applications/*/extensionProperties/*",
       "method": "GET",
       "responseCode": 200,
@@ -32495,6 +32489,12 @@
           "User"
         ]
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/applications/*/extensionProperties/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/*/removeGroup",
@@ -32589,21 +32589,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1/deviceManagement/troubleshootingEvents",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json",
-        "Content-Length": "228"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.deviceManagementTroubleshootingEvent",
-        "id": "fb26dcee-dcee-fb26-eedc-26fbeedc26fb",
-        "eventDateTime": "2016-12-31T23:59:23.3984029-08:00",
-        "correlationId": "Correlation Id value"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1/deviceManagement/troubleshootingEvents",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -32619,6 +32604,29 @@
             "correlationId": "Correlation Id value"
           }
         ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1/deviceManagement/troubleshootingEvents",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json",
+        "Content-Length": "558"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.enrollmentTroubleshootingEvent",
+        "id": "c4a623f5-23f5-c4a6-f523-a6c4f523a6c4",
+        "eventDateTime": "2016-12-31T23:59:23.3984029-08:00",
+        "correlationId": "Correlation Id value",
+        "managedDeviceIdentifier": "Managed Device Identifier value",
+        "operatingSystem": "Operating System value",
+        "osVersion": "Os Version value",
+        "userId": "User Id value",
+        "deviceId": "Device Id value",
+        "enrollmentType": "userEnrollment",
+        "failureCategory": "authentication",
+        "failureReason": "Failure Reason value"
       }
     },
     {
@@ -32880,18 +32888,6 @@
       "responseHeaders": {}
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/users/*/authentication/emailMethods",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "id": "3ddfcfc8-9383-446f-83cc-3ab9be4be18f",
-        "emailAddress": "kim@contoso.com"
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/users/*/authentication/phoneMethods",
       "method": "POST",
       "responseCode": 201,
@@ -32903,6 +32899,18 @@
         "phoneType": "phoneType-value",
         "smsSignInState": "ready",
         "id": "3179e48a-750b-4051-897c-87b9720928f7"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*/authentication/emailMethods",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "id": "3ddfcfc8-9383-446f-83cc-3ab9be4be18f",
+        "emailAddress": "kim@contoso.com"
       }
     },
     {
@@ -33123,6 +33131,64 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#conditionalAccess/policies/$entity",
+        "id": "7359d0e0-d8a9-4afa-8a93-e23e099d7be8",
+        "displayName": "Access to EXO requires MFA",
+        "createdDateTime": "2019-10-14T19:52:00.050958Z",
+        "modifiedDateTime": null,
+        "state": "enabled",
+        "sessionControls": null,
+        "conditions": {
+          "signInRiskLevels": [],
+          "clientAppTypes": [
+            "mobileAppsAndDesktopClients",
+            "browser"
+          ],
+          "platforms": null,
+          "applications": {
+            "includeApplications": [
+              "00000002-0000-0ff1-ce00-000000000000"
+            ],
+            "excludeApplications": [],
+            "includeUserActions": []
+          },
+          "users": {
+            "includeUsers": [],
+            "excludeUsers": [],
+            "includeGroups": [
+              "ba8e7ded-8b0f-4836-ba06-8ff1ecc5c8ba"
+            ],
+            "excludeGroups": [],
+            "includeRoles": [],
+            "excludeRoles": []
+          },
+          "locations": {
+            "includeLocations": [
+              "All"
+            ],
+            "excludeLocations": [
+              "AllTrusted"
+            ]
+          }
+        },
+        "grantControls": {
+          "operator": "OR",
+          "builtInControls": [
+            "mfa"
+          ],
+          "customAuthenticationFactors": [],
+          "termsOfUse": []
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -33214,64 +33280,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#conditionalAccess/policies/$entity",
-        "id": "7359d0e0-d8a9-4afa-8a93-e23e099d7be8",
-        "displayName": "Access to EXO requires MFA",
-        "createdDateTime": "2019-10-14T19:52:00.050958Z",
-        "modifiedDateTime": null,
-        "state": "enabled",
-        "sessionControls": null,
-        "conditions": {
-          "signInRiskLevels": [],
-          "clientAppTypes": [
-            "mobileAppsAndDesktopClients",
-            "browser"
-          ],
-          "platforms": null,
-          "applications": {
-            "includeApplications": [
-              "00000002-0000-0ff1-ce00-000000000000"
-            ],
-            "excludeApplications": [],
-            "includeUserActions": []
-          },
-          "users": {
-            "includeUsers": [],
-            "excludeUsers": [],
-            "includeGroups": [
-              "ba8e7ded-8b0f-4836-ba06-8ff1ecc5c8ba"
-            ],
-            "excludeGroups": [],
-            "includeRoles": [],
-            "excludeRoles": []
-          },
-          "locations": {
-            "includeLocations": [
-              "All"
-            ],
-            "excludeLocations": [
-              "AllTrusted"
-            ]
-          }
-        },
-        "grantControls": {
-          "operator": "OR",
-          "builtInControls": [
-            "mfa"
-          ],
-          "customAuthenticationFactors": [],
-          "termsOfUse": []
-        }
       }
     },
     {
@@ -33658,12 +33666,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/schedulingGroups/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/schedulingGroups/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -33689,6 +33691,12 @@
           }
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/schedulingGroups/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/schedulingGroups/*",
@@ -33947,6 +33955,14 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/adminConsentRequestPolicy",
+      "method": "PUT",
+      "responseCode": 204,
+      "responseHeaders": {
+        "Content-Type": "text/plain"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/adminConsentRequestPolicy",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -33971,14 +33987,6 @@
             "queryRoot": null
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/adminConsentRequestPolicy",
-      "method": "PUT",
-      "responseCode": 204,
-      "responseHeaders": {
-        "Content-Type": "text/plain"
       }
     },
     {
@@ -34195,6 +34203,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/authenticationFlowsPolicy",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/authenticationFlowsPolicy",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -34209,12 +34223,6 @@
           "isEnabled": true
         }
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/authenticationFlowsPolicy",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/channels/*/messages?$top=3",
@@ -34647,7 +34655,7 @@
       "responseCode": 200,
       "responseHeaders": {
         "Content-Type": "application/json",
-        "Content-Length": "156"
+        "Content-Length": "188"
       },
       "responseBody": {
         "value": [
@@ -34657,10 +34665,12 @@
             "userCounts": [
               {
                 "reportDate": "2020-06-30",
-                "windows": 1445,
-                "mac": 146,
-                "mobile": 1131,
-                "web": 1080
+                "outlook": 1513,
+                "word": 911,
+                "excel": 790,
+                "powerPoint": 683,
+                "oneNote": 969,
+                "teams": 1532
               }
             ]
           }
@@ -34873,12 +34883,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/timeOffRequests/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/timeOffRequests/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -34889,6 +34893,12 @@
         "endDateTime": "datetime-value",
         "timeOffReasonId": "timeOffReasonId-value"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/timeOffRequests/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/messages?$select=sender,subject",
@@ -35346,6 +35356,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/featureRolloutPolicies/*",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/featureRolloutPolicies/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -35365,12 +35381,6 @@
         "isEnabled": true,
         "isAppliedToOrganization": false
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/featureRolloutPolicies/*",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/*/addGroup",
@@ -35669,6 +35679,43 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/security/triggers/retentionEvents",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.security.retentionEvent",
+        "id": "fcdbfb58-d0c6-85dd-d011-4e0ff9a6805d",
+        "displayName": "String",
+        "description": "String",
+        "eventQuery": [
+          {
+            "@odata.type": "microsoft.graph.security.eventQuery"
+          }
+        ],
+        "eventTriggerDateTime": "String (timestamp)",
+        "createdBy": {
+          "@odata.type": "microsoft.graph.identitySet"
+        },
+        "createdDateTime": "String (timestamp)",
+        "lastModifiedBy": {
+          "@odata.type": "microsoft.graph.identitySet"
+        },
+        "lastModifiedDateTime": "String (timestamp)",
+        "eventPropagationResults": [
+          {
+            "@odata.type": "microsoft.graph.security.eventPropagationResult"
+          }
+        ],
+        "eventStatus": {
+          "@odata.type": "microsoft.graph.security.retentionEventStatus"
+        },
+        "lastStatusUpdateDateTime": "String (timestamp)"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/security/triggers/retentionEvents",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -35706,43 +35753,6 @@
             "lastStatusUpdateDateTime": "String (timestamp)"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/security/triggers/retentionEvents",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.security.retentionEvent",
-        "id": "fcdbfb58-d0c6-85dd-d011-4e0ff9a6805d",
-        "displayName": "String",
-        "description": "String",
-        "eventQuery": [
-          {
-            "@odata.type": "microsoft.graph.security.eventQuery"
-          }
-        ],
-        "eventTriggerDateTime": "String (timestamp)",
-        "createdBy": {
-          "@odata.type": "microsoft.graph.identitySet"
-        },
-        "createdDateTime": "String (timestamp)",
-        "lastModifiedBy": {
-          "@odata.type": "microsoft.graph.identitySet"
-        },
-        "lastModifiedDateTime": "String (timestamp)",
-        "eventPropagationResults": [
-          {
-            "@odata.type": "microsoft.graph.security.eventPropagationResult"
-          }
-        ],
-        "eventStatus": {
-          "@odata.type": "microsoft.graph.security.retentionEventStatus"
-        },
-        "lastStatusUpdateDateTime": "String (timestamp)"
       }
     },
     {
@@ -35847,31 +35857,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/timeOffReasons/*",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "id": "TOR_891045ca-b5d2-406b-aa06-a3c8921245d7",
-        "createdDateTime": "2019-03-12T22:10:38.242Z",
-        "lastModifiedDateTime": "2019-03-12T22:10:38.242Z",
-        "displayName": "Vacation",
-        "iconType": "plane",
-        "isActive": true,
-        "lastModifiedBy": {
-          "application": null,
-          "device": null,
-          "conversation": null,
-          "user": {
-            "id": "366c0b19-49b1-41b5-a03f-9f3887bd0ed8",
-            "displayName": "John Doe"
-          }
-        }
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/timeOffReasons/*",
       "method": "PUT",
       "responseCode": 200,
       "responseHeaders": {
@@ -35891,6 +35876,31 @@
           "user": {
             "id": "366c0b19-49b1-41b5-a03f-9f3887bd0ed8",
             "displayName": "Alex Wilbur"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/timeOffReasons/*",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "id": "TOR_891045ca-b5d2-406b-aa06-a3c8921245d7",
+        "createdDateTime": "2019-03-12T22:10:38.242Z",
+        "lastModifiedDateTime": "2019-03-12T22:10:38.242Z",
+        "displayName": "Vacation",
+        "iconType": "plane",
+        "isActive": true,
+        "lastModifiedBy": {
+          "application": null,
+          "device": null,
+          "conversation": null,
+          "user": {
+            "id": "366c0b19-49b1-41b5-a03f-9f3887bd0ed8",
+            "displayName": "John Doe"
           }
         }
       }
@@ -35929,12 +35939,6 @@
         "contentType": "plain",
         "id": "{97A21473-8339-4BF0-BCB6-F55E4909FFB8}"
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/*",
@@ -35985,6 +35989,12 @@
           }
         ]
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/*",
@@ -36212,6 +36222,19 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/contactFolders/*/childFolders",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "parentFolderId": "AQMkADIxYjJiYgEzLTFmNjYALTRjYTMtODA1NC0wZDkxZGNmOTcxNTQALgAAA8RJzXYaLKZPlmn0ge0edZkBADa3qi2IMXRNg6RwQSHe_F8AAAIBDgAAAA==",
+        "displayName": "Family",
+        "id": "AAMkADIxYjJiYmIzLTFmNjYtNGNhMy04MDU0LTBkOTFkY2Y5NzE1NAAuAAAAAADESc12GiymT5Zp9IHtHnWZAQA2t6otiDF0TYOkcEEh3vhfAAAGgUC1AAA="
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/contactFolders/*/childFolders",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -36225,19 +36248,6 @@
             "id": "id-value"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/contactFolders/*/childFolders",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "parentFolderId": "AQMkADIxYjJiYgEzLTFmNjYALTRjYTMtODA1NC0wZDkxZGNmOTcxNTQALgAAA8RJzXYaLKZPlmn0ge0edZkBADa3qi2IMXRNg6RwQSHe_F8AAAIBDgAAAA==",
-        "displayName": "Family",
-        "id": "AAMkADIxYjJiYmIzLTFmNjYtNGNhMy04MDU0LTBkOTFkY2Y5NzE1NAAuAAAAAADESc12GiymT5Zp9IHtHnWZAQA2t6otiDF0TYOkcEEh3vhfAAAGgUC1AAA="
       }
     },
     {
@@ -36854,12 +36864,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancepolicies/*",
       "method": "GET",
       "responseCode": 200,
@@ -36874,6 +36878,12 @@
         "isOrganizationDefault": true,
         "id": "id-value"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies/*",
@@ -36923,12 +36933,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users/*/teamwork/installedApps/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*/teamwork/installedApps/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -36943,7 +36947,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/teamwork/workforceIntegrations/*",
+      "url": "https://graph.microsoft.com/v1.0/users/*/teamwork/installedApps/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -36986,6 +36990,12 @@
         "url": "url-value",
         "supportedEntities": "supportedEntities-value"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teamwork/workforceIntegrations/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/directory/administrativeUnits/*",
@@ -37596,6 +37606,19 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/print/printers/*/taskTriggers/*",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#print/printers/taskTriggers/$entity",
+        "id": "b6a843ca-e60e-4e20-a222-a58d85eead6d",
+        "event": "jobStarted"
+      }
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/print/taskDefinitions/*/tasks/*",
       "method": "PATCH",
       "responseCode": 200,
@@ -37609,19 +37632,6 @@
           "state": "completed",
           "description": "Task execution is completed."
         }
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/print/printers/*/taskTriggers/*",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#print/printers/taskTriggers/$entity",
-        "id": "b6a843ca-e60e-4e20-a222-a58d85eead6d",
-        "event": "jobStarted"
       }
     },
     {
@@ -37957,6 +37967,35 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#policies/appManagementPolicies/$entity",
+        "id": "a4ab1ed9-46bb-4bef-88d4-86fd6398dd5d",
+        "displayName": "credential management policy",
+        "description": "Lorem ipsum",
+        "isEnabled": true,
+        "restrictions": {
+          "passwordCredentials": [
+            {
+              "restrictionType": "passwordAddition",
+              "maxLifetime": null,
+              "restrictForAppsCreatedAfterDateTime": "2019-10-19T10:37:00Z"
+            },
+            {
+              "restrictionType": "passwordLifetime",
+              "maxLifetime": "P4DT12H30M5S",
+              "restrictForAppsCreatedAfterDateTime": "2018-10-19T10:37:00Z"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -38003,35 +38042,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#policies/appManagementPolicies/$entity",
-        "id": "a4ab1ed9-46bb-4bef-88d4-86fd6398dd5d",
-        "displayName": "credential management policy",
-        "description": "Lorem ipsum",
-        "isEnabled": true,
-        "restrictions": {
-          "passwordCredentials": [
-            {
-              "restrictionType": "passwordAddition",
-              "maxLifetime": null,
-              "restrictForAppsCreatedAfterDateTime": "2019-10-19T10:37:00Z"
-            },
-            {
-              "restrictionType": "passwordLifetime",
-              "maxLifetime": "P4DT12H30M5S",
-              "restrictForAppsCreatedAfterDateTime": "2018-10-19T10:37:00Z"
-            }
-          ]
-        }
       }
     },
     {
@@ -38742,6 +38752,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users/*/teamwork/installedApps",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users/*/teamwork/installedApps",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -38754,12 +38770,6 @@
           }
         ]
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*/teamwork/installedApps",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teamwork/workforceIntegrations",
@@ -38806,12 +38816,6 @@
     {
       "url": "https://graph.microsoft.com/v1.0/applications/*/removePassword",
       "method": "POST",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/*",
-      "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
     },
@@ -38906,6 +38910,12 @@
           "allowStaffSelection": true
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/solutions/bookingBusinesses/*",
@@ -39053,6 +39063,12 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/chats/*/markChatUnreadForUser",
+      "method": "POST",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/users/*/chats?$expand=members",
       "method": "GET",
       "responseCode": 200,
@@ -39187,12 +39203,6 @@
           }
         ]
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/chats/*/markChatUnreadForUser",
-      "method": "POST",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/channels/*/messages/*",
@@ -39612,12 +39622,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -39645,29 +39649,10 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/outlook/supportedLanguages",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.localeInfo)",
-        "value": [
-          {
-            "locale": "af-ZA",
-            "displayName": "Afrikaans (Suid-Afrika)"
-          },
-          {
-            "locale": "en-US",
-            "displayName": "English (United States)"
-          },
-          {
-            "locale": "en-CA",
-            "displayName": "English (Canada)"
-          }
-        ]
-      }
+      "url": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/outlook/supportedTimeZones",
@@ -39699,18 +39684,26 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/print/printers/*/taskTriggers",
+      "url": "https://graph.microsoft.com/v1.0/me/outlook/supportedLanguages",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
-        "Content-Type": "application/json"
+        "Content-type": "application/json"
       },
       "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#print/printers('fcc7fe6a-5ba7-4059-8017-702f3a41c8a4')/taskTriggers",
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.localeInfo)",
         "value": [
           {
-            "id": "b6a843ca-e60e-4e20-a222-a58d85eead6d",
-            "event": "jobStarted"
+            "locale": "af-ZA",
+            "displayName": "Afrikaans (Suid-Afrika)"
+          },
+          {
+            "locale": "en-US",
+            "displayName": "English (United States)"
+          },
+          {
+            "locale": "en-CA",
+            "displayName": "English (Canada)"
           }
         ]
       }
@@ -39726,6 +39719,23 @@
         "@odata.context": "https://graph.print.microsoft.com/v1.0/$metadata#Collection(Microsoft.Graph.PrintTaskTrigger)",
         "id": "b6a843ca-e60e-4e20-a222-a58d85eead6d",
         "event": "jobStarted"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/print/printers/*/taskTriggers",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#print/printers('fcc7fe6a-5ba7-4059-8017-702f3a41c8a4')/taskTriggers",
+        "value": [
+          {
+            "id": "b6a843ca-e60e-4e20-a222-a58d85eead6d",
+            "event": "jobStarted"
+          }
+        ]
       }
     },
     {
@@ -39795,6 +39805,29 @@
             "riskDetail": "String",
             "userDisplayName": "String",
             "userPrincipalName": "String"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/security/alerts_v2/*/comments",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/beta/$metadata#security/alerts_v2('da637865765418431569_-773071023')/comments",
+        "value": [
+          {
+            "comment": "test",
+            "createdByDisplayName": "secAdmin@contoso.onmicrosoft.com",
+            "createdDateTime": "2022-10-13T07:08:30.1606766Z"
+          },
+          {
+            "comment": "Demo for docs",
+            "createdByDisplayName": "secAdmin@contoso.onmicrosoft.com",
+            "createdDateTime": "2022-10-13T07:08:40.3825324Z"
           }
         ]
       }
@@ -41070,6 +41103,38 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/education/classes/*/schools",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.educationSchool)",
+        "value": [
+          {
+            "id": "8a07f5a8-edc9-4847-bbf2-dde106594bf4",
+            "displayName": "Management Fast Track",
+            "description": null,
+            "principalEmail": "aroebuck@principal.edu",
+            "principalName": "Amy Roebuck",
+            "externalPrincipalId": "14008",
+            "externalId": "10002",
+            "externalSource": "sis",
+            "externalSourceDetail": "SIS",
+            "phone": "555-123-4567",
+            "address": {
+              "city": "Redmond",
+              "countryOrRegion": "US",
+              "postalCode": "98052",
+              "state": "WA",
+              "street": "2 Microsoft Way"
+            }
+          }
+        ]
+      }
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/education/classes/*/members",
       "method": "GET",
       "responseCode": 200,
@@ -41148,38 +41213,6 @@
               "immutableId": null
             },
             "student": {}
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/education/classes/*/schools",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.educationSchool)",
-        "value": [
-          {
-            "id": "8a07f5a8-edc9-4847-bbf2-dde106594bf4",
-            "displayName": "Management Fast Track",
-            "description": null,
-            "principalEmail": "aroebuck@principal.edu",
-            "principalName": "Amy Roebuck",
-            "externalPrincipalId": "14008",
-            "externalId": "10002",
-            "externalSource": "sis",
-            "externalSourceDetail": "SIS",
-            "phone": "555-123-4567",
-            "address": {
-              "city": "Redmond",
-              "countryOrRegion": "US",
-              "postalCode": "98052",
-              "state": "WA",
-              "street": "2 Microsoft Way"
-            }
           }
         ]
       }
@@ -41658,6 +41691,28 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/onenote/sections/*/pages",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "title": "title-value",
+        "createdByAppId": "createdByAppId-value",
+        "links": {
+          "oneNoteClientUrl": {
+            "href": "href-value"
+          },
+          "oneNoteWebUrl": {
+            "href": "href-value"
+          }
+        },
+        "contentUrl": "contentUrl-value",
+        "lastModifiedDateTime": "2016-10-19T10:37:00Z"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/onenote/sections/*/pages",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -41681,28 +41736,6 @@
             "lastModifiedDateTime": "2016-10-19T10:37:00Z"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/onenote/sections/*/pages",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "title": "title-value",
-        "createdByAppId": "createdByAppId-value",
-        "links": {
-          "oneNoteClientUrl": {
-            "href": "href-value"
-          },
-          "oneNoteWebUrl": {
-            "href": "href-value"
-          }
-        },
-        "contentUrl": "contentUrl-value",
-        "lastModifiedDateTime": "2016-10-19T10:37:00Z"
       }
     },
     {
@@ -41930,12 +41963,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/groups/*/unsubscribeByMail",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {}
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/groups/*/calendar/events/*",
       "method": "PATCH",
       "responseCode": 200,
@@ -42062,6 +42089,12 @@
           }
         }
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/groups/*/unsubscribeByMail",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/identityProviders",
@@ -42240,12 +42273,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/sites/*/termStore/groups/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/sites/*/termStore/groups/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -42258,6 +42285,12 @@
         "id": "1FFD3F87-9464-488A-A0EC-8FB90911182C",
         "displayName": "myGroup"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/sites/*/termStore/groups/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users/*/exportPersonalData",
@@ -42564,6 +42597,12 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/unfollow",
+      "method": "POST",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/me/drive/root/search(q=*)",
       "method": "GET",
       "responseCode": 200,
@@ -42593,12 +42632,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/drive/items/*/unfollow",
-      "method": "POST",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/education/schools/*/users",
       "method": "GET",
       "responseCode": 200,
@@ -42606,6 +42639,12 @@
         "Content-type": "application/json"
       },
       "responseBody": "{\n  \"value\": [\n    {\n      \"id\": \"13012\",\n      \"displayName\": \"Dion Matheson\",\n      \"givenName\": \"Dion\",\n      \"middleName\": \" \",\n      \"surname\": \"Matheson\",\n      \"mail\": \"DionM@contoso.com\",\n      \"mobilePhone\": \"+1 (253) 555-0101\",\n      \"createdBy\": {\n        \"user\": {\n          \"displayName\": \"Susana Rocha\",\n          \"id\": \"14012\",\n        }\n      },\n      \"externalSource\": \"sis\",\n      \"mailingAddress\": {\n        \"city\": \"Los Angeles\",\n        \"countryOrRegion\": \"United States\",\n        \"postalCode\": \"98055\",\n        \"state\": \"CA\",\n        \"street\": \"12345 Main St.\"\n      },\n      \"primaryRole\": \"student\",\n      \"residenceAddress\": {\n        \"city\": \"Los Angeles\",\n        \"countryOrRegion\": \"United States\",\n        \"postalCode\": \"98055\",\n        \"state\": \"CA\",\n        \"street\": \"12345 Main St.\"\n      }\n    }\n  ]\n}"
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/messages/*/attachments",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/messages/*/attachments",
@@ -42630,12 +42669,6 @@
           }
         ]
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/messages/*/attachments",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groups/*/permissionGrants",
@@ -42930,31 +42963,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/shifts/*",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "id": "SHFT_ca485cdd-a42c-4b93-9e6a-6fa54fd45fe1",
-        "createdDateTime": "2019-06-06T20:15:38.9Z",
-        "lastModifiedDateTime": "2019-11-18T01:12:08.318Z",
-        "schedulingGroupId": "TAG_d18fd675-3ac8-41b2-8038-d17fdac8b0d3",
-        "userId": "a7b0c8c4-3f5c-492f-ab13-40f0e0f0ffa8",
-        "draftShift": null,
-        "lastModifiedBy": {
-          "application": null,
-          "device": null,
-          "conversation": null,
-          "user": {
-            "id": "1c717a55-febd-4850-b5f6-101f3a29972c",
-            "displayName": "Sumanth Lingom"
-          }
-        }
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/shifts/*",
       "method": "PUT",
       "responseCode": 200,
       "responseHeaders": {
@@ -43010,6 +43018,31 @@
           "device": {
             "id": "string",
             "displayName": "string"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/schedule/shifts/*",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "id": "SHFT_ca485cdd-a42c-4b93-9e6a-6fa54fd45fe1",
+        "createdDateTime": "2019-06-06T20:15:38.9Z",
+        "lastModifiedDateTime": "2019-11-18T01:12:08.318Z",
+        "schedulingGroupId": "TAG_d18fd675-3ac8-41b2-8038-d17fdac8b0d3",
+        "userId": "a7b0c8c4-3f5c-492f-ab13-40f0e0f0ffa8",
+        "draftShift": null,
+        "lastModifiedBy": {
+          "application": null,
+          "device": null,
+          "conversation": null,
+          "user": {
+            "id": "1c717a55-febd-4850-b5f6-101f3a29972c",
+            "displayName": "Sumanth Lingom"
           }
         }
       }
@@ -43094,12 +43127,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groups/*/conversations/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/groups/*/conversations/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -43116,6 +43143,12 @@
         ],
         "preview": "Welcome to the Ask HR group.Use the group to share ideas, files, and important dates.Start a conversationRead group conversations or start your own.Add to the team siteStart sharing and collaborating on content in SharePoint.Share filesView,"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/groups/*/conversations/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groups/*/threads/*/posts",
@@ -43617,12 +43650,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/tags/*/members/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/tags/*/members/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -43639,19 +43666,10 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/sites/*/termStore/groups",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "id": "85825593-5593-8582-9355-828593558285",
-        "createdDateTime": "2019-06-21T20:01:37Z",
-        "description": "My term group",
-        "scope": "global",
-        "displayName": "myGroup"
-      }
+      "url": "https://graph.microsoft.com/v1.0/teams/*/tags/*/members/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/sites/*/termStore/groups",
@@ -43670,6 +43688,21 @@
             "displayName": "myGroup"
           }
         ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/sites/*/termStore/groups",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "id": "85825593-5593-8582-9355-828593558285",
+        "createdDateTime": "2019-06-21T20:01:37Z",
+        "description": "My term group",
+        "scope": "global",
+        "displayName": "myGroup"
       }
     },
     {
@@ -44336,22 +44369,7 @@
       "url": "https://graph.microsoft.com/v1.0/me/events/*/attachments",
       "method": "POST",
       "responseCode": 201,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('cd209b0b-3f83-4c35-82d2-d88a61820480')/events('AAMkAGI1AAAt9AHjAAA%3D')/attachments/$entity",
-        "@odata.type": "#microsoft.graph.fileAttachment",
-        "id": "AAMkAGI1AAAt9AHjAAABEgAQAEdBogju-MJEu6Ngg-1_W0g=",
-        "lastModifiedDateTime": "2017-04-15T03:21:49Z",
-        "name": "menu.txt",
-        "contentType": "text/plain",
-        "size": 178,
-        "isInline": false,
-        "contentId": null,
-        "contentLocation": null,
-        "contentBytes": "bWFjIGFuZCBjaGVlc2UgdG9kYXk="
-      }
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groups/*/members/*/$ref",
@@ -44441,6 +44459,12 @@
       }
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/sites/*/lists/*/items/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/sites/*/lists/*/columns",
       "method": "POST",
       "responseCode": 201,
@@ -44462,12 +44486,6 @@
           "maxLength": 255
         }
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/sites/*/lists/*/items/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/onenote/operations/*",
@@ -44664,47 +44682,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/planner/tasks/*/details",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "description": "Task details properties:\nchecklist:Sub items\nreferences:Related links",
-        "previewType": "automatic",
-        "references": {
-          "https%3A//developer%2Emicrosoft%2Ecom/en-us/graph/graph-explorer": {
-            "@odata.type": "#microsoft.graph.plannerExternalReference",
-            "alias": "Graph Explorer",
-            "type": "Other",
-            "previewPriority": "0009005706180391122",
-            "lastModifiedBy": {
-              "user": {
-                "id": "fbab97d0-4932-4511-b675-204639209557"
-              }
-            },
-            "lastModifiedDateTime": "2017-04-24T22:52:29.814Z"
-          }
-        },
-        "checklist": {
-          "d280ed1a-9f6b-4f9c-a962-fb4d00dc50ff": {
-            "@odata.type": "#microsoft.graph.plannerChecklistItem",
-            "isChecked": false,
-            "title": "Try reading task details",
-            "orderHint": "8587094707721254251P]",
-            "lastModifiedBy": {
-              "user": {
-                "id": "e396de0e-4812-4fcb-9f9e-0358744df343"
-              }
-            },
-            "lastModifiedDateTime": "2017-04-14T02:16:14.866Z"
-          }
-        },
-        "id": "gcrYAaAkgU2EQUvpkNNXLGQAGTtu"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/planner/tasks/*/details",
       "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
@@ -44763,6 +44740,47 @@
               }
             },
             "lastModifiedDateTime": "2017-04-24T22:52:29.814Z"
+          }
+        },
+        "id": "gcrYAaAkgU2EQUvpkNNXLGQAGTtu"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/planner/tasks/*/details",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "description": "Task details properties:\nchecklist:Sub items\nreferences:Related links",
+        "previewType": "automatic",
+        "references": {
+          "https%3A//developer%2Emicrosoft%2Ecom/en-us/graph/graph-explorer": {
+            "@odata.type": "#microsoft.graph.plannerExternalReference",
+            "alias": "Graph Explorer",
+            "type": "Other",
+            "previewPriority": "0009005706180391122",
+            "lastModifiedBy": {
+              "user": {
+                "id": "fbab97d0-4932-4511-b675-204639209557"
+              }
+            },
+            "lastModifiedDateTime": "2017-04-24T22:52:29.814Z"
+          }
+        },
+        "checklist": {
+          "d280ed1a-9f6b-4f9c-a962-fb4d00dc50ff": {
+            "@odata.type": "#microsoft.graph.plannerChecklistItem",
+            "isChecked": false,
+            "title": "Try reading task details",
+            "orderHint": "8587094707721254251P]",
+            "lastModifiedBy": {
+              "user": {
+                "id": "e396de0e-4812-4fcb-9f9e-0358744df343"
+              }
+            },
+            "lastModifiedDateTime": "2017-04-14T02:16:14.866Z"
           }
         },
         "id": "gcrYAaAkgU2EQUvpkNNXLGQAGTtu"
@@ -45549,6 +45567,88 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/education/me/rubrics/*",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "displayName": "Example Credit Rubric after display name patch",
+        "id": "c4459fcb-a761-4f70-ac5b-e9466cb77c2a",
+        "description": {
+          "content": "This is an example of a credit rubric (no points)",
+          "contentType": "text"
+        },
+        "levels": [
+          {
+            "levelId": "dec665d4-cf1b-4481-ac61-1d5b6188f4f5",
+            "displayName": "Good",
+            "description": {
+              "content": "",
+              "contentType": "text"
+            }
+          },
+          {
+            "levelId": "3f2e4b0f-508e-4005-984b-17e061bc5377",
+            "displayName": "Poor",
+            "description": {
+              "content": "",
+              "contentType": "text"
+            }
+          }
+        ],
+        "qualities": [
+          {
+            "qualityId": "dc79dcbf-b536-4797-9c5b-902f28129fd0",
+            "description": {
+              "content": "Argument",
+              "contentType": "text"
+            },
+            "criteria": [
+              {
+                "id": "8937fa15-4a7c-4f27-bd01-ca3471d2d1d5",
+                "description": {
+                  "content": "The essay's argument is persuasive.",
+                  "contentType": "text"
+                }
+              },
+              {
+                "id": "4dfb5263-1d3f-4f0a-93ef-d24d800d0f69",
+                "description": {
+                  "content": "The essay's argument does not make sense.",
+                  "contentType": "text"
+                }
+              }
+            ]
+          },
+          {
+            "qualityId": "7e087062-ac25-4629-8386-a946350936db",
+            "description": {
+              "content": "Spelling and Grammar",
+              "contentType": "text"
+            },
+            "criteria": [
+              {
+                "id": "12276eb2-122c-4ad2-ba92-335ea798c88e",
+                "description": {
+                  "content": "The essay uses proper spelling and grammar with few or no errors.",
+                  "contentType": "text"
+                }
+              },
+              {
+                "id": "3db7e6b2-2b1b-4f8e-9fca-bea701159145",
+                "description": {
+                  "content": "The essay has numerous errors in spelling and/or grammar.",
+                  "contentType": "text"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/education/me/rubrics/*",
       "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
@@ -45650,88 +45750,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/education/me/rubrics/*",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "displayName": "Example Credit Rubric after display name patch",
-        "id": "c4459fcb-a761-4f70-ac5b-e9466cb77c2a",
-        "description": {
-          "content": "This is an example of a credit rubric (no points)",
-          "contentType": "text"
-        },
-        "levels": [
-          {
-            "levelId": "dec665d4-cf1b-4481-ac61-1d5b6188f4f5",
-            "displayName": "Good",
-            "description": {
-              "content": "",
-              "contentType": "text"
-            }
-          },
-          {
-            "levelId": "3f2e4b0f-508e-4005-984b-17e061bc5377",
-            "displayName": "Poor",
-            "description": {
-              "content": "",
-              "contentType": "text"
-            }
-          }
-        ],
-        "qualities": [
-          {
-            "qualityId": "dc79dcbf-b536-4797-9c5b-902f28129fd0",
-            "description": {
-              "content": "Argument",
-              "contentType": "text"
-            },
-            "criteria": [
-              {
-                "id": "8937fa15-4a7c-4f27-bd01-ca3471d2d1d5",
-                "description": {
-                  "content": "The essay's argument is persuasive.",
-                  "contentType": "text"
-                }
-              },
-              {
-                "id": "4dfb5263-1d3f-4f0a-93ef-d24d800d0f69",
-                "description": {
-                  "content": "The essay's argument does not make sense.",
-                  "contentType": "text"
-                }
-              }
-            ]
-          },
-          {
-            "qualityId": "7e087062-ac25-4629-8386-a946350936db",
-            "description": {
-              "content": "Spelling and Grammar",
-              "contentType": "text"
-            },
-            "criteria": [
-              {
-                "id": "12276eb2-122c-4ad2-ba92-335ea798c88e",
-                "description": {
-                  "content": "The essay uses proper spelling and grammar with few or no errors.",
-                  "contentType": "text"
-                }
-              },
-              {
-                "id": "3db7e6b2-2b1b-4f8e-9fca-bea701159145",
-                "description": {
-                  "content": "The essay has numerous errors in spelling and/or grammar.",
-                  "contentType": "text"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/groups/*/assignLicense",
       "method": "POST",
       "responseCode": 202,
@@ -45789,6 +45807,20 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "id": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+        "groupLifetimeInDays": 100,
+        "managedGroupTypes": "Selected",
+        "alternateNotificationEmails": "admin@contoso.com"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -45803,20 +45835,6 @@
             "alternateNotificationEmails": "admin@contoso.com"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "id": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-        "groupLifetimeInDays": 100,
-        "managedGroupTypes": "Selected",
-        "alternateNotificationEmails": "admin@contoso.com"
       }
     },
     {
@@ -46496,7 +46514,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/mailFolders/*/copy",
+      "url": "https://graph.microsoft.com/v1.0/me/mailFolders/*/move",
       "method": "POST",
       "responseCode": 200,
       "responseHeaders": {
@@ -46512,7 +46530,7 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/mailFolders/*/move",
+      "url": "https://graph.microsoft.com/v1.0/me/mailFolders/*/copy",
       "method": "POST",
       "responseCode": 200,
       "responseHeaders": {
@@ -46741,29 +46759,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/security/*/*/comments",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/beta/$metadata#security/alerts_v2('da637865765418431569_-773071023')/comments",
-        "value": [
-          {
-            "comment": "test",
-            "createdByDisplayName": "secAdmin@contoso.onmicrosoft.com",
-            "createdDateTime": "2022-10-13T07:08:30.1606766Z"
-          },
-          {
-            "comment": "Demo for docs",
-            "createdByDisplayName": "secAdmin@contoso.onmicrosoft.com",
-            "createdDateTime": "2022-10-13T07:08:40.3825324Z"
-          }
-        ]
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/sites/*/permissions/*",
       "method": "DELETE",
       "responseCode": 204,
@@ -46853,6 +46848,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/installedApps",
+      "method": "POST",
+      "responseCode": 200,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/installedApps",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -46873,12 +46874,6 @@
           }
         ]
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/installedApps",
-      "method": "POST",
-      "responseCode": 200,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps",
@@ -46906,6 +46901,39 @@
           {
             "@odata.type": "#microsoft.graph.deletedTeam",
             "id": "bac01407-8047-d8d4-2547-988daf836adf"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.etag": "W/\"xzyPKP0BiUGgld+lMKXwbQAAnBoTIw==\"",
+        "importance": "low",
+        "isReminderOn": false,
+        "status": "notStarted",
+        "title": "A new task",
+        "createdDateTime": "2020-08-18T09:03:05.8339192Z",
+        "lastModifiedDateTime": "2020-08-18T09:03:06.0827766Z",
+        "categories": [
+          "Important"
+        ],
+        "id": "AlMKXwbQAAAJws6wcAAAA=",
+        "body": {
+          "content": "",
+          "contentType": "text"
+        },
+        "linkedResources": [
+          {
+            "id": "f9cddce2-dce2-f9cd-e2dc-cdf9e2dccdf9",
+            "webUrl": "http://microsoft.com",
+            "applicationName": "Microsoft",
+            "displayName": "Microsoft"
           }
         ]
       }
@@ -46944,39 +46972,6 @@
                 "id": "30911960-7321-4cba-9ba0-cdb68e2984c7"
               }
             ]
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/todo/lists/*/tasks",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.etag": "W/\"xzyPKP0BiUGgld+lMKXwbQAAnBoTIw==\"",
-        "importance": "low",
-        "isReminderOn": false,
-        "status": "notStarted",
-        "title": "A new task",
-        "createdDateTime": "2020-08-18T09:03:05.8339192Z",
-        "lastModifiedDateTime": "2020-08-18T09:03:06.0827766Z",
-        "categories": [
-          "Important"
-        ],
-        "id": "AlMKXwbQAAAJws6wcAAAA=",
-        "body": {
-          "content": "",
-          "contentType": "text"
-        },
-        "linkedResources": [
-          {
-            "id": "f9cddce2-dce2-f9cd-e2dc-cdf9e2dccdf9",
-            "webUrl": "http://microsoft.com",
-            "applicationName": "Microsoft",
-            "displayName": "Microsoft"
           }
         ]
       }
@@ -47675,11 +47670,53 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/security/incidents/*",
-      "method": "GET",
+      "url": "https://graph.microsoft.com/v1.0/security/alerts_v2/*",
+      "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
         "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.security.alert",
+        "id": "da637551227677560813_-961444813",
+        "providerAlertId": "da637551227677560813_-961444813",
+        "incidentId": "28282",
+        "status": "inProgress",
+        "severity": "low",
+        "classification": "truePositive",
+        "determination": "malware",
+        "serviceSource": "microsoftDefenderForEndpoint",
+        "detectionSource": "antivirus",
+        "detectorId": "e0da400f-affd-43ef-b1d5-afc2eb6f2756",
+        "tenantId": "b3c1b5fc-828c-45fa-a1e1-10d74f6d6e9c",
+        "title": "Suspicious execution of hidden file",
+        "description": "A hidden file has been launched. This activity could indicate a compromised host. Attackers often hide files associated with malicious tools to evade file system inspection and defenses.",
+        "recommendedActions": "Collect artifacts and determine scope\n�\tReview the machine timeline for suspicious activities that may have occurred before and after the time of the alert, and record additional related artifacts (files, IPs/URLs) \n�\tLook for the presence of relevant artifacts on other systems. Identify commonalities and differences between potentially compromised systems.\n�\tSubmit relevant files for deep analysis and review resulting detailed behavioral information.\n�\tSubmit undetected files to the MMPC malware portal\n\nInitiate containment & mitigation \n�\tContact the user to verify intent and initiate local remediation actions as needed.\n�\tUpdate AV signatures and run a full scan. The scan might reveal and remove previously-undetected malware components.\n�\tEnsure that the machine has the latest security updates. In particular, ensure that you have installed the latest software, web browser, and Operating System versions.\n�\tIf credential theft is suspected, reset all relevant users passwords.\n�\tBlock communication with relevant URLs or IPs at the organization�s perimeter.",
+        "category": "DefenseEvasion",
+        "assignedTo": "secAdmin@contoso.onmicrosoft.com",
+        "alertWebUrl": "https://security.microsoft.com/alerts/da637551227677560813_-961444813?tid=b3c1b5fc-828c-45fa-a1e1-10d74f6d6e9c",
+        "incidentWebUrl": "https://security.microsoft.com/incidents/28282?tid=b3c1b5fc-828c-45fa-a1e1-10d74f6d6e9c",
+        "actorDisplayName": null,
+        "threatDisplayName": null,
+        "threatFamilyName": null,
+        "mitreTechniques": [
+          "T1564.001"
+        ],
+        "createdDateTime": "2021-04-27T12:19:27.7211305Z",
+        "lastUpdateDateTime": "2021-05-02T14:19:01.3266667Z",
+        "resolvedDateTime": null,
+        "firstActivityDateTime": "2021-04-26T07:45:50.116Z",
+        "lastActivityDateTime": "2021-05-02T07:56:58.222Z",
+        "comments": [],
+        "evidence": []
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/security/incidents/*",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
       },
       "responseBody": {
         "@odata.type": "#microsoft.graph.incident",
@@ -47709,10 +47746,10 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/security/incidents/*",
-      "method": "PATCH",
+      "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
-        "Content-Type": "application/json"
+        "Content-type": "application/json"
       },
       "responseBody": {
         "@odata.type": "#microsoft.graph.incident",
@@ -47867,19 +47904,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/contactFolders/*",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "displayName": "Finance",
-        "id": "AAMkAGI2TKI5AAA=",
-        "parentFolderId": "AAMkAGI2AAEOAAA="
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/contactFolders/*",
       "method": "PATCH",
       "responseCode": 200,
       "responseHeaders": {
@@ -47889,6 +47913,19 @@
         "parentFolderId": "parentFolderId-value",
         "displayName": "displayName-value",
         "id": "id-value"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/contactFolders/*",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "displayName": "Finance",
+        "id": "AAMkAGI2TKI5AAA=",
+        "parentFolderId": "AAMkAGI2AAEOAAA="
       }
     },
     {
@@ -48128,12 +48165,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identityProviders/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/identityProviders/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -48146,6 +48177,12 @@
         "clientId": "56433757-cadd-4135-8431-2c9e3fd68ae8",
         "clientSecret": "*****"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identityProviders/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identityProviders/*",
@@ -48224,6 +48261,49 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/onlineMeetings/*",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "id": "MSpkYzE3Njc0Yy04MWQ5LTRhZGItYmZi",
+        "creationDateTime": "2020-07-03T00:23:39.444642Z",
+        "startDateTime": "2020-09-09T21:33:30.8546353Z",
+        "endDateTime": "2020-09-09T22:03:30.8566356Z",
+        "joinWebUrl": "url",
+        "subject": "Patch Meeting Subject",
+        "isBroadcast": false,
+        "autoAdmittedUsers": "EveryoneInCompany",
+        "outerMeetingAutoAdmittedUsers": null,
+        "participants": {
+          "organizer": {
+            "upn": "upn",
+            "role": "presenter",
+            "identity": {
+              "azureApplicationInstance": null,
+              "applicationInstance": null,
+              "application": null,
+              "device": null,
+              "user": {
+                "id": "8716745d-77a9-4be3-afff-009e4b81658e",
+                "displayName": null,
+                "tenantId": "0823831b-1f1b-424b-b90a-1caa345a742a",
+                "identityProvider": "AAD"
+              }
+            }
+          }
+        },
+        "audioConferencing": {
+          "conferenceId": "id",
+          "tollNumber": "+1-900-555-0100",
+          "tollFreeNumber": "+1-800-555-0100",
+          "dialinUrl": "url"
+        }
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/onlineMeetings/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -48265,49 +48345,6 @@
           "isPasscodeRequired": false,
           "joinMeetingId": "1234567890",
           "passcode": null
-        }
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/onlineMeetings/*",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "id": "MSpkYzE3Njc0Yy04MWQ5LTRhZGItYmZi",
-        "creationDateTime": "2020-07-03T00:23:39.444642Z",
-        "startDateTime": "2020-09-09T21:33:30.8546353Z",
-        "endDateTime": "2020-09-09T22:03:30.8566356Z",
-        "joinWebUrl": "url",
-        "subject": "Patch Meeting Subject",
-        "isBroadcast": false,
-        "autoAdmittedUsers": "EveryoneInCompany",
-        "outerMeetingAutoAdmittedUsers": null,
-        "participants": {
-          "organizer": {
-            "upn": "upn",
-            "role": "presenter",
-            "identity": {
-              "azureApplicationInstance": null,
-              "applicationInstance": null,
-              "application": null,
-              "device": null,
-              "user": {
-                "id": "8716745d-77a9-4be3-afff-009e4b81658e",
-                "displayName": null,
-                "tenantId": "0823831b-1f1b-424b-b90a-1caa345a742a",
-                "identityProvider": "AAD"
-              }
-            }
-          }
-        },
-        "audioConferencing": {
-          "conferenceId": "id",
-          "tollNumber": "+1-900-555-0100",
-          "tollFreeNumber": "+1-800-555-0100",
-          "dialinUrl": "url"
         }
       }
     },
@@ -48976,12 +49013,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groups/*/threads/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/groups/*/threads/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -48999,6 +49030,12 @@
         "preview": "Meeting to plan new trainings.Join Microsoft Teams Online Meeting<https://teams.microsoft.com/l/meetup-join/19%3a900876baa3134907b0dcb41a0d220e31%40thread.skype/1501527539926?tenantId=dcd219dd-bc68-4b9b-bf0b-4a33a796be35>",
         "isLocked": false
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/groups/*/threads/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groups/*/threads/*",
@@ -49111,13 +49148,13 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/events/*/accept",
+      "url": "https://graph.microsoft.com/v1.0/me/events/*/cancel",
       "method": "POST",
       "responseCode": 202,
       "responseHeaders": {}
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me/events/*/cancel",
+      "url": "https://graph.microsoft.com/v1.0/me/events/*/accept",
       "method": "POST",
       "responseCode": 202,
       "responseHeaders": {}
@@ -49445,12 +49482,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/schemaExtensions/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/schemaExtensions/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -49473,6 +49504,12 @@
           }
         ]
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/schemaExtensions/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/schemaExtensions/*",
@@ -50548,12 +50585,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/planner/buckets/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/planner/buckets/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -50579,6 +50610,12 @@
         "orderHint": "85752723360752+",
         "id": "hsOf2dhOJkqyYYZEtdzDe2QAIUCR"
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/planner/buckets/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/photo/*/$value",
@@ -50720,16 +50757,6 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/unarchive",
-      "method": "POST",
-      "responseCode": 202,
-      "responseHeaders": {
-        "Location": "/teams({id})/operations({opId})",
-        "Content-Type": "text/plain",
-        "Content-Length": "0"
-      }
-    },
-    {
       "url": "https://graph.microsoft.com/v1.0/teams/*/members/*",
       "method": "PATCH",
       "responseCode": 200,
@@ -50746,6 +50773,16 @@
         "displayName": "John Doe",
         "userId": "8b081ef6-4792-4def-b2c9-c363a1bf41d5",
         "email": null
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/unarchive",
+      "method": "POST",
+      "responseCode": 202,
+      "responseHeaders": {
+        "Location": "/teams({id})/operations({opId})",
+        "Content-Type": "text/plain",
+        "Content-Length": "0"
       }
     },
     {
@@ -52428,12 +52465,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/groupSettings/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/groupSettings/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -52507,6 +52538,12 @@
     {
       "url": "https://graph.microsoft.com/v1.0/groupSettings/*",
       "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/groupSettings/*",
+      "method": "DELETE",
       "responseCode": 204,
       "responseHeaders": {}
     },
@@ -52672,6 +52709,12 @@
       "responseBody": "{\n  \"createdBy\": {\n    \"user\": {\n      \"id\": \"6463a5ce-2119-4198-9f2a-628761df4a62\"\n    }\n  },\n  \"planId\": \"xqQg5FS2LkCp935s-FIFm2QAFkHM\",\n  \"bucketId\": \"gcrYAaAkgU2EQUvpkNNXLGQAGTtu\",\n  \"title\": \"title-value\",\n  \"orderHint\": \"9223370609546166567W\",\n  \"assigneePriority\": \"90057581\\\"\",\n  \"createdDateTime\": \"2015-03-24T18:36:49.2407981Z\",\n  \"assignments\": {\n    \"6463a5ce-2119-4198-9f2a-628761df4a62\": {\n      \"@odata.type\": \"#microsoft.graph.plannerAssignment\",\n      \"assignedBy\": {\n        \"user\": {\n          \"id\": \"6463a5ce-2119-4198-9f2a-628761df4a62\"\n        }\n      },\n      \"assignedDateTime\": \"2015-03-25T18:38:21.956Z\",\n      \"orderHint\": \"N9917\"\n    },\n    \"fbab97d0-4932-4511-b675-204639209557\": {\n      \"@odata.type\": \"#microsoft.graph.plannerAssignment\",\n      \"assignedBy\": {\n        \"user\": {\n          \"id\": \"1e9955d2-6acd-45bf-86d3-b546fdc795eb\"\n        }\n      },\n      \"assignedDateTime\": \"2017-04-24T22:40:44.5665917\",\n      \"orderHint\": \"RWk1\"\n    },\n    \"aaa27244-1db4-476a-a5cb-004607466324\": {\n      \"@odata.type\": \"#microsoft.graph.plannerAssignment\",\n      \"assignedBy\": {\n        \"user\": {\n          \"id\": \"6463a5ce-2119-4198-9f2a-628761df4a62\"\n        }\n      },\n      \"assignedDateTime\": \"2015-03-25T18:38:21.956Z\",\n      \"orderHint\": \"U2883\"\n    }\n  },\n  \"appliedCategories\": {\n    \"category3\": true,\n    \"category5\": true,\n    \"category6\": true,\n  },\n  \"id\":\"01gzSlKkIUSUl6DF_EilrmQAKDhh\",\n  \"priority\": 5\n}"
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/me/activities/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
       "url": "https://graph.microsoft.com/v1.0/me/photo/$value",
       "method": "GET",
       "responseCode": 200,
@@ -52681,12 +52724,6 @@
       "url": "https://graph.microsoft.com/v1.0/me/photo/$value",
       "method": "PUT",
       "responseCode": 200,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/activities/*",
-      "method": "DELETE",
-      "responseCode": 204,
       "responseHeaders": {}
     },
     {
@@ -53208,6 +53245,12 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/organization/*",
+      "method": "PATCH",
+      "responseCode": 204,
+      "responseHeaders": {}
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/organization/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -53297,12 +53340,6 @@
           }
         ]
       }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/organization/*",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/contacts/delta",
@@ -53652,6 +53689,22 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/teams/*/tags/*",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.teamworkTag",
+        "id": "MjQzMmI1N2ItMGFiZC00M2RiLWFhN2ItMTZlYWRkMTE1ZDM0IyM3ZDg4M2Q4Yi1hMTc5LTRkZDctOTNiMy1hOGQzZGUxYTIxMmUjI3RhY29VSjN2RGk==",
+        "teamId": "53c53217-fe77-4383-bc5a-ed4937a1aecd",
+        "displayName": "Finance",
+        "memberCount": 2,
+        "tagType": "standard"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/teams/*/tags/*",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -53667,22 +53720,6 @@
           "memberCount": "2",
           "tagType": "standard"
         }
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/teams/*/tags/*",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.teamworkTag",
-        "id": "MjQzMmI1N2ItMGFiZC00M2RiLWFhN2ItMTZlYWRkMTE1ZDM0IyM3ZDg4M2Q4Yi1hMTc5LTRkZDctOTNiMy1hOGQzZGUxYTIxMmUjI3RhY29VSjN2RGk==",
-        "teamId": "53c53217-fe77-4383-bc5a-ed4937a1aecd",
-        "displayName": "Finance",
-        "memberCount": 2,
-        "tagType": "standard"
       }
     },
     {
@@ -53868,6 +53905,21 @@
       "responseHeaders": {}
     },
     {
+      "url": "https://graph.microsoft.com/v1.0/drive/items/*",
+      "method": "PATCH",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "id": "0123456789abc",
+        "name": "Shared legal agreements",
+        "bundle": {
+          "childCount": 3
+        }
+      }
+    },
+    {
       "url": "https://graph.microsoft.com/beta/drive/bundles",
       "method": "GET",
       "responseCode": 200,
@@ -53893,21 +53945,6 @@
           }
         ],
         "@odata.nextLink": "https://..."
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/drive/items/*",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "id": "0123456789abc",
-        "name": "Shared legal agreements",
-        "bundle": {
-          "childCount": 3
-        }
       }
     },
     {
@@ -54695,6 +54732,22 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/me/todo/lists",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-Type": "application/json"
+      },
+      "responseBody": {
+        "@odata.type": "#microsoft.graph.todoTaskList",
+        "id": "AAMkADIyAAAhrbPWAAA=",
+        "displayName": "Travel items",
+        "isOwner": true,
+        "isShared": false,
+        "wellknownListName": "none"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/me/todo/lists",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -54717,44 +54770,6 @@
             "isOwner": true,
             "isShared": false,
             "wellknownListName": "none"
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me/todo/lists",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-Type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.todoTaskList",
-        "id": "AAMkADIyAAAhrbPWAAA=",
-        "displayName": "Travel items",
-        "isOwner": true,
-        "isShared": false,
-        "wellknownListName": "none"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/applications",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#applications",
-        "value": [
-          {
-            "appId": "00000000-0000-0000-0000-000000000000",
-            "identifierUris": [
-              "http://contoso/"
-            ],
-            "displayName": "My app",
-            "publisherDomain": "contoso.com",
-            "signInAudience": "AzureADMyOrg"
           }
         ]
       }
@@ -54822,10 +54837,26 @@
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/identity/*/*",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
+      "url": "https://graph.microsoft.com/v1.0/applications",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#applications",
+        "value": [
+          {
+            "appId": "00000000-0000-0000-0000-000000000000",
+            "identifierUris": [
+              "http://contoso/"
+            ],
+            "displayName": "My app",
+            "publisherDomain": "contoso.com",
+            "signInAudience": "AzureADMyOrg"
+          }
+        ]
+      }
     },
     {
       "url": "https://graph.microsoft.com/v1.0/identity/*/*",
@@ -54839,6 +54870,12 @@
         "userFlowType": "signUpOrSignIn",
         "userFlowTypeVersion": 1
       }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/identity/*/*",
+      "method": "DELETE",
+      "responseCode": 204,
+      "responseHeaders": {}
     },
     {
       "url": "https://graph.microsoft.com/v1.0/chats/*/tabs",
@@ -55125,48 +55162,6 @@
             ]
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/security/*/*",
-      "method": "PATCH",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.type": "#microsoft.graph.security.alert",
-        "id": "da637551227677560813_-961444813",
-        "providerAlertId": "da637551227677560813_-961444813",
-        "incidentId": "28282",
-        "status": "inProgress",
-        "severity": "low",
-        "classification": "truePositive",
-        "determination": "malware",
-        "serviceSource": "microsoftDefenderForEndpoint",
-        "detectionSource": "antivirus",
-        "detectorId": "e0da400f-affd-43ef-b1d5-afc2eb6f2756",
-        "tenantId": "b3c1b5fc-828c-45fa-a1e1-10d74f6d6e9c",
-        "title": "Suspicious execution of hidden file",
-        "description": "A hidden file has been launched. This activity could indicate a compromised host. Attackers often hide files associated with malicious tools to evade file system inspection and defenses.",
-        "recommendedActions": "Collect artifacts and determine scope\n�\tReview the machine timeline for suspicious activities that may have occurred before and after the time of the alert, and record additional related artifacts (files, IPs/URLs) \n�\tLook for the presence of relevant artifacts on other systems. Identify commonalities and differences between potentially compromised systems.\n�\tSubmit relevant files for deep analysis and review resulting detailed behavioral information.\n�\tSubmit undetected files to the MMPC malware portal\n\nInitiate containment & mitigation \n�\tContact the user to verify intent and initiate local remediation actions as needed.\n�\tUpdate AV signatures and run a full scan. The scan might reveal and remove previously-undetected malware components.\n�\tEnsure that the machine has the latest security updates. In particular, ensure that you have installed the latest software, web browser, and Operating System versions.\n�\tIf credential theft is suspected, reset all relevant users passwords.\n�\tBlock communication with relevant URLs or IPs at the organization�s perimeter.",
-        "category": "DefenseEvasion",
-        "assignedTo": "secAdmin@contoso.onmicrosoft.com",
-        "alertWebUrl": "https://security.microsoft.com/alerts/da637551227677560813_-961444813?tid=b3c1b5fc-828c-45fa-a1e1-10d74f6d6e9c",
-        "incidentWebUrl": "https://security.microsoft.com/incidents/28282?tid=b3c1b5fc-828c-45fa-a1e1-10d74f6d6e9c",
-        "actorDisplayName": null,
-        "threatDisplayName": null,
-        "threatFamilyName": null,
-        "mitreTechniques": [
-          "T1564.001"
-        ],
-        "createdDateTime": "2021-04-27T12:19:27.7211305Z",
-        "lastUpdateDateTime": "2021-05-02T14:19:01.3266667Z",
-        "resolvedDateTime": null,
-        "firstActivityDateTime": "2021-04-26T07:45:50.116Z",
-        "lastActivityDateTime": "2021-05-02T07:56:58.222Z",
-        "comments": [],
-        "evidence": []
       }
     },
     {
@@ -56210,27 +56205,6 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/devices",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "value": [
-          {
-            "accountEnabled": true,
-            "deviceId": "00000000-0000-0000-0000-000000000000",
-            "deviceVersion": 1,
-            "displayName": "contoso_Android",
-            "Manufacturer": "Google",
-            "Model": "Pixel 3a",
-            "operatingSystemVersion": "10.0"
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/devices",
       "method": "POST",
       "responseCode": 201,
       "responseHeaders": {
@@ -56249,6 +56223,27 @@
         "id": "id-value",
         "operatingSystem": "linux",
         "operatingSystemVersion": "1"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/devices",
+      "method": "GET",
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "value": [
+          {
+            "accountEnabled": true,
+            "deviceId": "00000000-0000-0000-0000-000000000000",
+            "deviceVersion": 1,
+            "displayName": "contoso_Android",
+            "Manufacturer": "Google",
+            "Model": "Pixel 3a",
+            "operatingSystemVersion": "10.0"
+          }
+        ]
       }
     },
     {

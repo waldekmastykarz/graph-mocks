@@ -13,7 +13,7 @@ const { sanitizeUrl } = require('./sanitizeUrl');
  */
 function initArgs() {
   const args = process.argv.slice(2);
-  if (args.length !== 3) {
+  if (args.length < 2) {
     console.error('Usage: node generate.js <path-to-graph-docs> <output-file> [v1.0|beta]');
     process.exit(1);
   }
@@ -23,7 +23,7 @@ function initArgs() {
   // used for changing server-relative URLs to absolute URLs
   let graphVersion = 'v1.0';
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < args.length; i++) {
     const chunk = args[i];
     if (chunk === 'v1.0' || chunk === 'beta') {
       graphVersion = chunk;
@@ -113,21 +113,29 @@ function writeToLog(message, level, source) {
 
 /**
  * Gets all .md files in the graph-docs folder
- * @returns {Array<string>} Array of file paths to .md files with Graph docs
+ * @param {string} docsPath Relative path to the graph-docs folder
+ * @param {function} callback Callback function that is called when all .md files are loaded
  */
-function getAllMdFiles(docsPath) {
-  const allFiles = [];
-  const files = fs.readdirSync(docsPath);
-  files.forEach(file => {
-    if (file.endsWith('.md')) {
-      allFiles.push(path.join(docsPath, file));
+function loadAllMdFiles(docsPath, callback) {
+  fs.readdir(docsPath, (err, files) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
     }
+
+    const allFiles = [];
+
+    files.forEach(file => {
+      if (file.endsWith('.md')) {
+        allFiles.push(path.join(docsPath, file));
+      }
+    });
+
+    totalFiles = allFiles.length;
+    updateProgress();
+
+    callback(allFiles);
   });
-
-  totalFiles = allFiles.length;
-  updateProgress();
-
-  return allFiles;
 }
 
 /**
@@ -229,18 +237,25 @@ function parseResponseBlock(lines) {
 /**
  * Extracts request and response blocks from a .md file
  * @param {string} filePath Relative path to .md file
- * @returns {Array<{request: {method: string, url: string, headers: object, body: string, source: object}, response: {statusCode: number, headers: object, body: string, source: object}}>} Array of request/response pairs
+ * @param {function} callback Callback function that is called when request/response pairs are extracted
  */
-function getRequestResponsePairs(filePath) {
+function loadRequestResponsePairs(filePath, callback) {
   writeToLog(`Processing file ${filePath}`, LogLevel.DEBUG, { file: filePath, line: 0 });
-
-  filesProcessed++;
-  updateProgress();
 
   const requestResponsePairs = [];
 
-  try {
-    const fileContents = fs.readFileSync(filePath, 'utf8');
+  fs.readFile(filePath, 'utf8', (err, fileContents) => {
+    if (err) {
+      writeToLog(err, LogLevel.ERROR, {
+        file: filePath,
+        line: 0
+      });
+      filesProcessed++;
+      updateProgress();
+      callback(requestResponsePairs);
+      return;
+    }
+
     const lines = fileContents.split('\n');
     let inRequestBlock = false;
     let inResponseBlock = false;
@@ -338,15 +353,11 @@ function getRequestResponsePairs(filePath) {
         codeLines.push(line);
       }
     });
-  }
-  catch (ex) {
-    writeToLog(ex, LogLevel.ERROR, {
-      file: filePath,
-      line: 0
-    });
-  }
 
-  return requestResponsePairs;
+    filesProcessed++;
+    updateProgress();
+    callback(requestResponsePairs);
+  });
 }
 
 /**
@@ -407,52 +418,71 @@ function convertRequestResponseToProxyMock(requestResponse) {
   return proxyMock;
 }
 
+/**
+ * Runs the script
+ */
 function run() {
   const { docsPath, outputFile, graphVersion } = initArgs();
 
-  const allFiles = getAllMdFiles(docsPath);
-  const requestResponsePairs = allFiles
-    .map(getRequestResponsePairs)
-    .flat();
-  requestResponsePairs.forEach(pair => {
-    pair.request.originalUrl = pair.request.url;
-    pair.request.url = generalizeRequestUrl({
-      originalUrl: pair.request.url,
-      source: pair.request.source,
-      graphVersion
-    });
-  });
   const proxyMocks = {
-    responses: requestResponsePairs
-      .map(convertRequestResponseToProxyMock)
-      .filter(mock => mock !== undefined)
-      // sort descending by URL length, so that the
-      // most specific URLs are matched first
-      .sort((a, b) => b.url.length - a.url.length)
+    responses: []
   };
 
-  const mocksCreated = proxyMocks.responses.length;
+  loadAllMdFiles(docsPath, allFiles => {
+    allFiles.forEach(filePath =>
+      loadRequestResponsePairs(filePath, requestResponsePairs => {
+        requestResponsePairs.forEach(pair => {
+          pair.request.originalUrl = pair.request.url;
+          pair.request.url = generalizeRequestUrl({
+            originalUrl: pair.request.url,
+            source: pair.request.source,
+            graphVersion
+          });
+        });
 
-  // dedupe proxy mocks by comparing URL and method
-  proxyMocks.responses = proxyMocks.responses.filter((mock, index) =>
-    index === proxyMocks.responses.findIndex(m => m.url === mock.url && m.method === mock.method));
+        proxyMocks.responses.push(...requestResponsePairs
+          .map(convertRequestResponseToProxyMock)
+          .filter(mock => mock !== undefined));
 
-  const mocksAfterDedupe = proxyMocks.responses.length;
+        if (filesProcessed < totalFiles) {
+          return;
+        }
 
-  updateProgress();
+        proxyMocks.responses = proxyMocks.responses
 
-  fs.writeFileSync(outputFile, JSON.stringify(proxyMocks, null, 2));
+        // sort descending by URL length, so that the
+        // most specific URLs are matched first
+        proxyMocks.responses.sort((a, b) => b.url.length - a.url.length);
 
-  if (requestsDetected === requestResponsePairsCreated &&
-    totalFiles === filesProcessed) {
-    spinner.succeed();
-  }
-  else {
-    spinner.warn();
-  }
-  console.error();
-  console.error(`Mocks created: ${mocksCreated}`);
-  console.error(`Mocks after dedupe: ${mocksAfterDedupe}`);
+        const mocksCreated = proxyMocks.responses.length;
+
+        // dedupe proxy mocks by comparing URL and method
+        proxyMocks.responses = proxyMocks.responses.filter((mock, index) =>
+          index === proxyMocks.responses.findIndex(m => m.url === mock.url && m.method === mock.method));
+
+        const mocksAfterDedupe = proxyMocks.responses.length;
+
+        updateProgress();
+
+        fs.writeFile(outputFile, JSON.stringify(proxyMocks, null, 2), err => {
+          if (err) {
+            spinner.fail(err);
+            process.exit(1);
+          }
+
+          if (requestsDetected === requestResponsePairsCreated &&
+            totalFiles === filesProcessed) {
+            spinner.succeed();
+          }
+          else {
+            spinner.warn();
+          }
+          console.error();
+          console.error(`Mocks created: ${mocksCreated}`);
+          console.error(`Mocks after dedupe: ${mocksAfterDedupe}`);
+        });
+      }));
+  });
 }
 
 run();

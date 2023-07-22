@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/generate.js"
+            "program": "${workspaceFolder}/generate.js",
+            "args": ["graph-docs-samples", "graph-sample-proxy-mocks.json"]
         }
     ]
 }

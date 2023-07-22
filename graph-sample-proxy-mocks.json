@@ -243,6 +243,28 @@
     },
     {
       "url": "https://graph.microsoft.com/v1.0/users",
+      "method": "POST",
+      "responseCode": 201,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+        "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+        "businessPhones": [],
+        "displayName": "Adele Vance",
+        "givenName": "Adele",
+        "jobTitle": "Product Marketing Manager",
+        "mail": "AdeleV@contoso.onmicrosoft.com",
+        "mobilePhone": "+1 425 555 0109",
+        "officeLocation": "18/2111",
+        "preferredLanguage": "en-US",
+        "surname": "Vance",
+        "userPrincipalName": "AdeleV@contoso.onmicrosoft.com"
+      }
+    },
+    {
+      "url": "https://graph.microsoft.com/v1.0/users",
       "method": "GET",
       "responseCode": 200,
       "responseHeaders": {
@@ -280,28 +302,6 @@
             "id": "4562bcc8-c436-4f95-b7c0-4f8ce89dca5e"
           }
         ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
-        "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
-        "businessPhones": [],
-        "displayName": "Adele Vance",
-        "givenName": "Adele",
-        "jobTitle": "Product Marketing Manager",
-        "mail": "AdeleV@contoso.onmicrosoft.com",
-        "mobilePhone": "+1 425 555 0109",
-        "officeLocation": "18/2111",
-        "preferredLanguage": "en-US",
-        "surname": "Vance",
-        "userPrincipalName": "AdeleV@contoso.onmicrosoft.com"
       }
     },
     {
