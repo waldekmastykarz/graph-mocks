@@ -7,8 +7,53 @@ const os = require('os');
 require('url');
 const { sanitizeUrl } = require('./sanitizeUrl');
 
-const docsPath = path.join(__dirname, 'graph-docs-samples');
-const outputFile = 'graph-v1_0-proxy-mocks.json';
+/**
+ * Initializes command line arguments
+ * @returns {{docsPath: string, outputFile: string, graphVersion: string}} Object containing command line arguments
+ */
+function initArgs() {
+  const args = process.argv.slice(2);
+  if (args.length !== 3) {
+    console.error('Usage: node generate.js <path-to-graph-docs> <output-file> [v1.0|beta]');
+    process.exit(1);
+  }
+
+  let docsPath = '';
+  let outputFile = '';
+  // used for changing server-relative URLs to absolute URLs
+  let graphVersion = 'v1.0';
+
+  for (let i = 0; i < 3; i++) {
+    const chunk = args[i];
+    if (chunk === 'v1.0' || chunk === 'beta') {
+      graphVersion = chunk;
+      continue;
+    }
+
+    if (!fs.existsSync(chunk)) {
+      outputFile = chunk;
+      continue;
+    }
+
+    if (fs.statSync(chunk).isDirectory()) {
+      docsPath = chunk;
+    }
+    else {
+      outputFile = chunk;
+    }
+  }
+
+  if (!docsPath) {
+    console.error('Please, specify the path to Microsoft Graph docs');
+    process.exit(1);
+  }
+  if (!outputFile) {
+    console.error('Please, specify the output file');
+    process.exit(1);
+  }
+
+  return { docsPath, outputFile, graphVersion };
+}
 
 let totalFiles = 0;
 let filesProcessed = 0;
@@ -35,6 +80,11 @@ function updateProgress() {
   spinner.text = `Generating mocks: ${filesProcessed}/${totalFiles} files processed, ${requestsDetected}/${requestResponsePairsCreated} requests detected/pairs created`;
 }
 
+/**
+ * Gets the name of a log level
+ * @param {number} level Log level
+ * @returns {string} Name of the log level
+ */
 function getLogLevelName(level) {
   return Object.keys(LogLevel)[level];
 }
@@ -42,25 +92,23 @@ function getLogLevelName(level) {
 /**
  * Writes a message to the log file
  * @param {string} message Message to write to the log file
- * @param {string} fileOrRequest File name or request URL that the message is associated with
+ * @param {string} source File name or request URL that the message is associated with
  * @returns {void}
  */
-function writeToLog(message, level, fileOrRequest) {
+function writeToLog(message, level, source) {
   if (currentLogLevel > level) {
     return;
   }
 
   const now = new Date();
-  let location = '';
-  if (fileOrRequest) {
-    if (fileOrRequest.startsWith('http')) {
-      location = fileOrRequest;
-    }
-    else {
-      location = path.relative(__dirname, fileOrRequest);
-    }
-  }
-  fs.appendFileSync(logFileName, `${getLogLevelName(level)} ${now.toISOString()}\t${location}\t${message}${os.EOL}`);
+  const chunks = [
+    now.toISOString(),
+    getLogLevelName(level),
+    `${source.file}:${source.line}`,
+    message,
+    os.EOL
+  ];
+  fs.appendFileSync(logFileName, chunks.join('\t'));
 }
 
 /**
@@ -137,8 +185,8 @@ function parseRequestBlock(lines) {
 
   const methodAndUrl = lines[0];
   const firstSpaceIndex = methodAndUrl.indexOf(' ');
-  request.method = methodAndUrl.substr(0, firstSpaceIndex);
-  request.url = methodAndUrl.substr(firstSpaceIndex + 1);
+  request.method = methodAndUrl.substring(0, firstSpaceIndex).trim();
+  request.url = methodAndUrl.substring(firstSpaceIndex + 1).trim();
 
   if (lines.length > 1) {
     const { headers, body } = parseRequestHeadersAndBody(lines.slice(1));
@@ -181,10 +229,10 @@ function parseResponseBlock(lines) {
 /**
  * Extracts request and response blocks from a .md file
  * @param {string} filePath Relative path to .md file
- * @returns {Array<{request: {method: string, url: string, headers: object, body: string}, response: {statusCode: number, headers: object, body: string}}>}
+ * @returns {Array<{request: {method: string, url: string, headers: object, body: string, source: object}, response: {statusCode: number, headers: object, body: string, source: object}}>} Array of request/response pairs
  */
 function getRequestResponsePairs(filePath) {
-  writeToLog(`Processing file ${filePath}`, LogLevel.DEBUG, filePath);
+  writeToLog(`Processing file ${filePath}`, LogLevel.DEBUG, { file: filePath, line: 0 });
 
   filesProcessed++;
   updateProgress();
@@ -196,13 +244,13 @@ function getRequestResponsePairs(filePath) {
     const lines = fileContents.split('\n');
     let inRequestBlock = false;
     let inResponseBlock = false;
-    let inCodeBlock = false;
+    let codeBlockStartLineNumber = -1;
     let codeLines = [];
 
     let request;
     let response;
 
-    lines.forEach(line => {
+    lines.forEach((line, index) => {
       if (line.indexOf('"blockType": "request"') > -1) {
         inRequestBlock = true;
         codeLines = [];
@@ -225,27 +273,45 @@ function getRequestResponsePairs(filePath) {
         }
 
         // start code block
-        if (!inCodeBlock) {
-          inCodeBlock = true;
+        if (codeBlockStartLineNumber === -1) {
+          codeBlockStartLineNumber = index;
           return;
         }
         // end code block
-        if (inCodeBlock) {
-          inCodeBlock = false;
-
+        if (codeBlockStartLineNumber > -1) {
           try {
             if (inRequestBlock) {
               requestsDetected++;
-              writeToLog(`Parsing request from lines ${codeLines.join(os.EOL)}`, LogLevel.DEBUG, filePath);
+              writeToLog(`Parsing request from lines ${codeLines.join(os.EOL)}`, LogLevel.DEBUG, {
+                file: filePath,
+                line: codeBlockStartLineNumber
+              });
               request = parseRequestBlock(codeLines);
-              writeToLog(`Parsed request ${JSON.stringify(request, null, 2)}`, LogLevel.DEBUG, filePath);
+              request.source = {
+                file: filePath,
+                line: codeBlockStartLineNumber
+              }
+              writeToLog(`Parsed request ${JSON.stringify(request, null, 2)}`, LogLevel.DEBUG, {
+                file: filePath,
+                line: codeBlockStartLineNumber
+              });
               codeLines = [];
               inRequestBlock = false;
             }
             else if (inResponseBlock) {
-              writeToLog(`Parsing response from lines ${codeLines.join(os.EOL)}`, LogLevel.DEBUG, filePath);
+              writeToLog(`Parsing response from lines ${codeLines.join(os.EOL)}`, LogLevel.DEBUG, {
+                file: filePath,
+                line: codeBlockStartLineNumber
+              });
               response = parseResponseBlock(codeLines);
-              writeToLog(`Parsed response ${JSON.stringify(response, null, 2)}`, LogLevel.DEBUG, filePath);
+              response.source = {
+                file: filePath,
+                line: codeBlockStartLineNumber
+              }
+              writeToLog(`Parsed response ${JSON.stringify(response, null, 2)}`, LogLevel.DEBUG, {
+                file: filePath,
+                line: codeBlockStartLineNumber
+              });
               requestResponsePairsCreated++;
               codeLines = [];
               requestResponsePairs.push({ request, response });
@@ -256,19 +322,28 @@ function getRequestResponsePairs(filePath) {
             }
           }
           catch (ex) {
-            writeToLog(ex, LogLevel.ERROR, filePath);
+            writeToLog(ex, LogLevel.ERROR, {
+              file: filePath,
+              line: codeBlockStartLineNumber
+            });
+          }
+          finally {
+            codeBlockStartLineNumber = -1;
           }
           return;
         }
       }
 
-      if (inCodeBlock) {
+      if (codeBlockStartLineNumber > -1) {
         codeLines.push(line);
       }
     });
   }
   catch (ex) {
-    writeToLog(ex, LogLevel.ERROR, filePath);
+    writeToLog(ex, LogLevel.ERROR, {
+      file: filePath,
+      line: 0
+    });
   }
 
   return requestResponsePairs;
@@ -276,21 +351,41 @@ function getRequestResponsePairs(filePath) {
 
 /**
  * Replaces segments of a Microsoft Graph request URL that represent IDs with wildcards
- * @param {string} originalUrl Absolute URL of a Microsoft Graph request
+ * @param {{originalUrl: string, source: {file: string, line: number}, graphVersion: string}} params Object containing original URL, source file and line number, and Graph version
  * @returns {string} Microsoft Graph request URL with wildcards for segments that represent IDs
  */
-function generalizeRequestUrl(originalUrl) {
-  let sanitizedUrl = sanitizeUrl(originalUrl);
+function generalizeRequestUrl(params) {
+  const { originalUrl, source, graphVersion } = params;
+
+  let sanitizedUrl = originalUrl;
+
+  if (!sanitizedUrl.startsWith('https://')) {
+    let prepend = `https://graph.microsoft.com`;
+
+    if (sanitizedUrl.indexOf('/v1.0/') < 0 && sanitizedUrl.indexOf('/beta/') < 0) {
+      prepend += `/${graphVersion}`;
+    }
+
+    sanitizedUrl = `${prepend}${sanitizedUrl}`;
+  }
+
+  sanitizedUrl = sanitizeUrl(sanitizedUrl);
   // replace {} and <> tokens with asterisks
   sanitizedUrl = sanitizedUrl.replace(/([{<][^>}]+[}>])/g, '*');
-  writeToLog(`Generalized URL ${originalUrl} to ${sanitizedUrl}`, LogLevel.DEBUG);
+
+  if (sanitizedUrl.trim().length === 0) {
+    console.error(`Unable to generalize URL ${originalUrl} in file ${source.file} at line ${source.line}`);
+    process.exit(1);
+  }
+
+  writeToLog(`Generalized URL ${originalUrl} to ${sanitizedUrl}`, LogLevel.DEBUG, source);
   return sanitizedUrl;
 }
 
 /**
  * Converts a request/response pair to a proxy mock
  * @param {{request: {method: string, url: string, headers: object, body: string}, response: {statusCode: number, headers: object, body: string}}} requestResponse Request/response pair
- * @returns {{url: string, method: string, responseCode: number, responseHeaders: object, responseBody: object}} Proxy mock response
+ * @returns {{url: string, method: string, responseCode: number, responseHeaders: object, responseBody: string}} Proxy mock
  */
 function convertRequestResponseToProxyMock(requestResponse) {
   const { request, response } = requestResponse;
@@ -306,45 +401,58 @@ function convertRequestResponseToProxyMock(requestResponse) {
     }
     catch (ex) {
       proxyMock.responseBody = response.body;
-      writeToLog(ex, LogLevel.WARN, request.url);
+      writeToLog(ex, LogLevel.WARN, response.source);
     }
   }
   return proxyMock;
 }
 
-const allFiles = getAllMdFiles(docsPath);
-const requestResponsePairs = allFiles
-  .map(getRequestResponsePairs)
-  .flat();
-requestResponsePairs.forEach(pair => pair.request.url = generalizeRequestUrl(pair.request.url));
-const proxyMocks = {
-  responses: requestResponsePairs
-    .map(convertRequestResponseToProxyMock)
-    .filter(mock => mock !== undefined)
-    // sort descending by URL length, so that the
-    // most specific URLs are matched first
-    .sort((a, b) => b.url.length - a.url.length)
-};
+function run() {
+  const { docsPath, outputFile, graphVersion } = initArgs();
 
-const mocksCreated = proxyMocks.responses.length;
+  const allFiles = getAllMdFiles(docsPath);
+  const requestResponsePairs = allFiles
+    .map(getRequestResponsePairs)
+    .flat();
+  requestResponsePairs.forEach(pair => {
+    pair.request.originalUrl = pair.request.url;
+    pair.request.url = generalizeRequestUrl({
+      originalUrl: pair.request.url,
+      source: pair.request.source,
+      graphVersion
+    });
+  });
+  const proxyMocks = {
+    responses: requestResponsePairs
+      .map(convertRequestResponseToProxyMock)
+      .filter(mock => mock !== undefined)
+      // sort descending by URL length, so that the
+      // most specific URLs are matched first
+      .sort((a, b) => b.url.length - a.url.length)
+  };
 
-// dedupe proxy mocks by comparing URL and method
-proxyMocks.responses = proxyMocks.responses.filter((mock, index) =>
-  index === proxyMocks.responses.findIndex(m => m.url === mock.url && m.method === mock.method));
+  const mocksCreated = proxyMocks.responses.length;
 
-const mocksAfterDedupe = proxyMocks.responses.length;
+  // dedupe proxy mocks by comparing URL and method
+  proxyMocks.responses = proxyMocks.responses.filter((mock, index) =>
+    index === proxyMocks.responses.findIndex(m => m.url === mock.url && m.method === mock.method));
 
-updateProgress();
+  const mocksAfterDedupe = proxyMocks.responses.length;
 
-fs.writeFileSync(outputFile, JSON.stringify(proxyMocks, null, 2));
+  updateProgress();
 
-if (requestsDetected === requestResponsePairsCreated &&
-  totalFiles === filesProcessed) {
-  spinner.succeed();
+  fs.writeFileSync(outputFile, JSON.stringify(proxyMocks, null, 2));
+
+  if (requestsDetected === requestResponsePairsCreated &&
+    totalFiles === filesProcessed) {
+    spinner.succeed();
+  }
+  else {
+    spinner.warn();
+  }
+  console.error();
+  console.error(`Mocks created: ${mocksCreated}`);
+  console.error(`Mocks after dedupe: ${mocksAfterDedupe}`);
 }
-else {
-  spinner.warn();
-}
-console.error();
-console.error(`Mocks created: ${mocksCreated}`);
-console.error(`Mocks after dedupe: ${mocksAfterDedupe}`);
+
+run();

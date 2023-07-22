@@ -164,6 +164,8 @@ function sanitizePathSegment(previousSegment, segment) {
   const segmentsToIgnore = ['$value', '$count', '$ref', '$batch'];
 
   if (
+    // MOD: oauth2PermissionGrants is a valid segment
+    segment === 'oauth2PermissionGrants' ||
     isAllAlpha(segment) ||
     isDeprecation(segment) ||
     SANITIZED_ITEM_PATH_REGEX.test(segment) ||
