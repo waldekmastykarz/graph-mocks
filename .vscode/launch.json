@@ -23,6 +23,16 @@
             ],
             "program": "${workspaceFolder}/loadDataFromSandbox.js",
             "args": ["graph-sample-proxy-mocks.json", "graph-sample-proxy-mocks-sandbox.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch combine",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/combine.js",
+            "args": []
         }
     ]
 }

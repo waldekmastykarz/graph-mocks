@@ -9,7 +9,8 @@
     "graph:beta": "node generateProxyMocks.js /Users/waldek/github/microsoftgraph/microsoft-graph-docs/api-reference/beta/api graph-beta-proxy-mocks.json beta",
     "sandbox:sample": "node loadDataFromSandbox.js graph-sample-proxy-mocks.json graph-sample-proxy-mocks-sandbox.json",
     "sandbox:v1": "node loadDataFromSandbox.js graph-v1_0-proxy-mocks.json graph-v1_0-proxy-mocks-sandbox.json",
-    "sandbox:beta": "node loadDataFromSandbox.js graph-beta-proxy-mocks.json graph-beta-proxy-mocks-sandbox.json"
+    "sandbox:beta": "node loadDataFromSandbox.js graph-beta-proxy-mocks.json graph-beta-proxy-mocks-sandbox.json",
+    "combine": "node combine.js"
   },
   "keywords": [],
   "author": "",
