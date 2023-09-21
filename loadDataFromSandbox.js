@@ -182,7 +182,7 @@ async function run() {
         writeToLog(JSON.stringify(error), LogLevel.ERROR, response.mock.exampleUrl);
       }
       else {
-        writeToLog(`Downloaded data ${JSON.stringify(response.data)}`, LogLevel.DEBUG, response.mock.exampleUrl);
+        writeToLog(`Downloaded data ${JSON.stringify(response.data)}`, LogLevel.INFO, response.mock.exampleUrl);
         response.mock.responseBody = response.data;
       }
 
