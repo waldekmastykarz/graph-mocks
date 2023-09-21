@@ -102,71 +102,112 @@ function loadMocksFile(proxyMocksFile, callback) {
   });
 }
 
-function downloadDataFromSandbox(mock, callback) {
+async function downloadDataFromSandbox(mock) {
   writeToLog(`Downloading data from the sandbox`, LogLevel.DEBUG, mock.exampleUrl);
-  fetch(`https://graph.office.net/en-us/graph/api/proxy?url=${encodeURIComponent(mock.exampleUrl)}`, {
-    headers: [
-      ['Authorization', 'Bearer {token:https://graph.microsoft.com/}'],
-      ['ConsistencyLevel', 'eventual']
-    ]
-  })
-    .then(response => {
+  let repeat = 0;
+
+  while (repeat++ < 10) {
+    writeToLog(`Attempt #${repeat}`, LogLevel.DEBUG, mock.exampleUrl);
+
+    try {
+      const response = await fetch(`https://graph.office.net/en-us/graph/api/proxy?url=${encodeURIComponent(mock.exampleUrl)}`, {
+        headers: [
+          ['Authorization', 'Bearer {token:https://graph.microsoft.com/}'],
+          ['ConsistencyLevel', 'eventual']
+        ]
+      });
+
       writeToLog(`Response status: ${response.status}`, LogLevel.DEBUG, mock.exampleUrl);
-      return response.json();
-    })
-    .then(data => {
-      if (data.error) {
-        callback(data.error, { mock, data: undefined });
+      if (response.status !== 429) {
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: data.error,
+            response: {
+              mock,
+              data: undefined
+            }
+          }
+        }
+        else {
+          return {
+            error: undefined,
+            response: {
+              mock,
+              data
+            }
+          }
+        }
       }
-      else {
-        callback(undefined, { mock, data });
+
+      if (response.headers.has('retry-after')) {
+        const sleep = parseInt(response.headers.get('retry-after'), 10) * 1000;
+        writeToLog(`Retry after: ${sleep}ms`, LogLevel.DEBUG, mock.exampleUrl);
+        await new Promise(resolve => setTimeout(resolve, sleep));
       }
-    })
-    .catch(error => callback(error, { mock, data: undefined }));
+    }
+    catch (error) {
+      return {
+        error,
+        response: {
+          mock,
+          data: undefined
+        }
+      }
+    }
+  }
+
+  return {
+    error: 'Too many retries',
+    response: {
+      mock,
+      data: undefined
+    }
+  }
 }
 
-function run() {
+async function run() {
   const { inputFile, outputFile } = initArgs();
 
-  loadMocksFile(inputFile, mocks => {
-    mocks.responses.forEach(mock => {
+  loadMocksFile(inputFile, async (mocks) => {
+    for (const mock of mocks.responses) {
       if (mock.method !== 'GET') {
         return;
       }
 
       totalRequests++;
 
-      downloadDataFromSandbox(mock, (err, res) => {
+      const { error, response } = await downloadDataFromSandbox(mock);
+
+      if (error) {
+        writeToLog(JSON.stringify(error), LogLevel.ERROR, response.mock.exampleUrl);
+      }
+      else {
+        writeToLog(`Downloaded data ${JSON.stringify(response.data)}`, LogLevel.DEBUG, response.mock.exampleUrl);
+        response.mock.responseBody = response.data;
+      }
+
+      requestsCompleted++;
+      updateProgress();
+
+      if (requestsCompleted < totalRequests) {
+        return;
+      }
+
+      fs.writeFile(outputFile, JSON.stringify(mocks, null, 2), err => {
         if (err) {
-          writeToLog(JSON.stringify(err), LogLevel.ERROR, res.mock.exampleUrl);
+          spinner.fail(err);
+          process.exit(1);
+        }
+
+        if (requestsCompleted === totalRequests) {
+          spinner.succeed();
         }
         else {
-          writeToLog(`Downloaded data ${JSON.stringify(res.data)}`, LogLevel.DEBUG, res.mock.exampleUrl);
-          res.mock.responseBody = res.data;
+          spinner.warn();
         }
-
-        requestsCompleted++;
-        updateProgress();
-
-        if (requestsCompleted < totalRequests) {
-          return;
-        }
-
-        fs.writeFile(outputFile, JSON.stringify(mocks, null, 2), err => {
-          if (err) {
-            spinner.fail(err);
-            process.exit(1);
-          }
-
-          if (requestsCompleted === totalRequests) {
-            spinner.succeed();
-          }
-          else {
-            spinner.warn();
-          }
-        });
       });
-    });
+    }
   });
 }
 
