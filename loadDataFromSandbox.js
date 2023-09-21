@@ -170,16 +170,15 @@ async function run() {
   const { inputFile, outputFile } = initArgs();
 
   loadMocksFile(inputFile, async (mocks) => {
-    for (const mock of mocks.responses) {
-      if (mock.method !== 'GET') {
-        return;
-      }
+    const getMocks = mocks.responses.filter(mock => mock.method === 'GET');
+    totalRequests = getMocks.length;
+    let hasErrors = false;
 
-      totalRequests++;
-
+    for (const mock of getMocks) {
       const { error, response } = await downloadDataFromSandbox(mock);
 
       if (error) {
+        hasErrors = true;
         writeToLog(JSON.stringify(error), LogLevel.ERROR, response.mock.exampleUrl);
       }
       else {
@@ -189,25 +188,21 @@ async function run() {
 
       requestsCompleted++;
       updateProgress();
+    }
 
-      if (requestsCompleted < totalRequests) {
-        return;
+    fs.writeFile(outputFile, JSON.stringify(mocks, null, 2), err => {
+      if (err) {
+        spinner.fail(err);
+        process.exit(1);
       }
 
-      fs.writeFile(outputFile, JSON.stringify(mocks, null, 2), err => {
-        if (err) {
-          spinner.fail(err);
-          process.exit(1);
-        }
-
-        if (requestsCompleted === totalRequests) {
-          spinner.succeed();
-        }
-        else {
-          spinner.warn();
-        }
-      });
-    }
+      if (hasErrors) {
+        spinner.warn(`Finished with errors. See ${logFileName} for details.`);
+      }
+      else {
+        spinner.succeed();
+      }
+    });
   });
 }
 
