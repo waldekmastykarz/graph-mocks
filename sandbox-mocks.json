@@ -1,0 +1,35 @@
+{
+  "responses": [
+    {
+      "url": "https://graph.office.net/en-us/graph/api/proxy*",
+      "method": "GET",
+      "nth": 11,
+      "responseCode": 200,
+      "responseHeaders": {
+        "Content-type": "application/json"
+      },
+      "responseBody": {
+        "value": [
+          {
+            "displayName": "John Smith",
+            "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://graph.office.net/en-us/graph/api/proxy*",
+      "method": "GET",
+      "responseCode": 429,
+      "responseHeaders": {
+        "Retry-After": "1"
+      },
+      "responseBody": {
+        "error": {
+          "code": "Throttled",
+          "message": "Rate limit is exceeded. Try again in 5 seconds."
+        }
+      }
+    }
+  ]
+}
