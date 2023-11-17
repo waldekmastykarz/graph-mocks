@@ -385,8 +385,8 @@ function generalizeRequestUrl(params) {
   sanitizedUrl = sanitizedUrl.replace(/([{<][^>}]+[}>])/g, '*');
 
   if (sanitizedUrl.trim().length === 0) {
-    console.error(`Unable to generalize URL ${originalUrl} in file ${source.file} at line ${source.line}`);
-    process.exit(1);
+    writeToLog(`Unable to generalize URL ${originalUrl}`, LogLevel.ERROR, source);
+    return originalUrl;
   }
 
   writeToLog(`Generalized URL ${originalUrl} to ${sanitizedUrl}`, LogLevel.DEBUG, source);
