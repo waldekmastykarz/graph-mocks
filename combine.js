@@ -44,6 +44,10 @@ function combine() {
 
     console.log(`  Removed ${total - mocks.responses.length} duplicates`);
 
+    // sort descending by URL length, so that the
+    // most specific URLs are matched first
+    mocks.responses.sort((a, b) => b.url.length - a.url.length);
+
     fs.writeFileSync(files[fileSet].outputFile, JSON.stringify(mocks, null, 2));
     console.log(`  Saved to ${files[fileSet].outputFile}`);
   });
