@@ -396,23 +396,27 @@ function generalizeRequestUrl(params) {
 /**
  * Converts a request/response pair to a proxy mock
  * @param {{request: {method: string, url: string, headers: object, body: string}, response: {statusCode: number, headers: object, body: string}}} requestResponse Request/response pair
- * @returns {{url: string, method: string, responseCode: number, responseHeaders: object, responseBody: string}} Proxy mock
+ * @returns {{request: {url: string, method: string}, response: {statusCode: number, headers: object, body: string} }} Proxy mock
  */
 function convertRequestResponseToProxyMock(requestResponse) {
   const { request, response } = requestResponse;
   const proxyMock = {
-    url: request.url,
-    exampleUrl: request.originalUrl,
-    method: request.method,
-    responseCode: response.statusCode,
-    responseHeaders: response.headers
+    request: {
+      url: request.url,
+      exampleUrl: request.originalUrl,
+      method: request.method
+    },
+    response: {
+      statusCode: response.statusCode,
+      headers: response.headers
+    }
   };
   if (response.body) {
     try {
-      proxyMock.responseBody = JSON.parse(response.body);
+      proxyMock.response.body = JSON.parse(response.body);
     }
     catch (ex) {
-      proxyMock.responseBody = response.body;
+      proxyMock.response.body = response.body;
       writeToLog(ex, LogLevel.WARN, response.source);
     }
   }
@@ -426,7 +430,7 @@ function run() {
   const { docsPath, outputFile, graphVersion } = initArgs();
 
   const proxyMocks = {
-    responses: []
+    mocks: []
   };
 
   loadAllMdFiles(docsPath, allFiles => {
@@ -441,7 +445,7 @@ function run() {
           });
         });
 
-        proxyMocks.responses.push(...requestResponsePairs
+        proxyMocks.mocks.push(...requestResponsePairs
           .map(convertRequestResponseToProxyMock)
           .filter(mock => mock !== undefined));
 
@@ -449,19 +453,17 @@ function run() {
           return;
         }
 
-        proxyMocks.responses = proxyMocks.responses
-
         // sort descending by URL length, so that the
         // most specific URLs are matched first
-        proxyMocks.responses.sort((a, b) => b.url.length - a.url.length);
+        proxyMocks.mocks.sort((a, b) => b.request.url.length - a.request.url.length);
 
-        const mocksCreated = proxyMocks.responses.length;
+        const mocksCreated = proxyMocks.mocks.length;
 
         // dedupe proxy mocks by comparing URL and method
-        proxyMocks.responses = proxyMocks.responses.filter((mock, index) =>
-          index === proxyMocks.responses.findIndex(m => m.url === mock.url && m.method === mock.method));
+        proxyMocks.mocks = proxyMocks.mocks.filter((mock, index) =>
+          index === proxyMocks.mocks.findIndex(m => m.request.url === mock.request.url && m.request.method === mock.request.method));
 
-        const mocksAfterDedupe = proxyMocks.responses.length;
+        const mocksAfterDedupe = proxyMocks.mocks.length;
 
         updateProgress();
 

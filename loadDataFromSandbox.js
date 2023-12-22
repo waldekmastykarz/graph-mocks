@@ -103,21 +103,21 @@ function loadMocksFile(proxyMocksFile, callback) {
 }
 
 async function downloadDataFromSandbox(mock) {
-  writeToLog(`Downloading data from the sandbox`, LogLevel.DEBUG, mock.exampleUrl);
+  writeToLog(`Downloading data from the sandbox`, LogLevel.DEBUG, mock.request.exampleUrl);
   let repeat = 0;
 
   while (repeat++ < 10) {
-    writeToLog(`Attempt #${repeat}`, LogLevel.DEBUG, mock.exampleUrl);
+    writeToLog(`Attempt #${repeat}`, LogLevel.DEBUG, mock.request.exampleUrl);
 
     try {
-      const response = await fetch(`https://graph.office.net/en-us/graph/api/proxy?url=${encodeURIComponent(mock.exampleUrl)}`, {
+      const response = await fetch(`https://graph.office.net/en-us/graph/api/proxy?url=${encodeURIComponent(mock.request.exampleUrl)}`, {
         headers: [
           ['Authorization', 'Bearer {token:https://graph.microsoft.com/}'],
           ['ConsistencyLevel', 'eventual']
         ]
       });
 
-      writeToLog(`Response status: ${response.status}`, LogLevel.DEBUG, mock.exampleUrl);
+      writeToLog(`Response status: ${response.status}`, LogLevel.DEBUG, mock.request.exampleUrl);
       if (response.status !== 429) {
         const data = await response.json();
         if (data.error) {
@@ -142,7 +142,7 @@ async function downloadDataFromSandbox(mock) {
 
       if (response.headers.has('retry-after')) {
         const sleep = parseInt(response.headers.get('retry-after'), 10) * 1000;
-        writeToLog(`Retry after: ${sleep}ms`, LogLevel.DEBUG, mock.exampleUrl);
+        writeToLog(`Retry after: ${sleep}ms`, LogLevel.DEBUG, mock.request.exampleUrl);
         await new Promise(resolve => setTimeout(resolve, sleep));
       }
     }
@@ -170,7 +170,7 @@ async function run() {
   const { inputFile, outputFile } = initArgs();
 
   loadMocksFile(inputFile, async (mocks) => {
-    const getMocks = mocks.responses.filter(mock => mock.method === 'GET');
+    const getMocks = mocks.mocks.filter(mock => mock.request.method === 'GET');
     totalRequests = getMocks.length;
     let hasErrors = false;
 
@@ -179,11 +179,11 @@ async function run() {
 
       if (error) {
         hasErrors = true;
-        writeToLog(JSON.stringify(error), LogLevel.ERROR, response.mock.exampleUrl);
+        writeToLog(JSON.stringify(error), LogLevel.ERROR, response.mock.request.exampleUrl);
       }
       else {
-        writeToLog(`Downloaded data ${JSON.stringify(response.data)}`, LogLevel.INFO, response.mock.exampleUrl);
-        response.mock.responseBody = response.data;
+        writeToLog(`Downloaded data ${JSON.stringify(response.data)}`, LogLevel.INFO, response.mock.request.exampleUrl);
+        response.mock.response.body = response.data;
       }
 
       requestsCompleted++;

@@ -24,29 +24,29 @@ function combine() {
     console.log(`Combining ${fileSet} mocks...`);
 
     const mocks = {
-      responses: []
+      mocks: []
     };
 
     for (let file of files[fileSet].files) {
       console.log(`  Adding ${file}...`);
 
       let data = JSON.parse(fs.readFileSync(file, 'utf8'));
-      mocks.responses = mocks.responses.concat(data.responses);
+      mocks.mocks = mocks.mocks.concat(data.mocks);
     }
 
-    const total = mocks.responses.length;
+    const total = mocks.mocks.length;
 
     console.log(`  Removing duplicates...`);
     // removing duplicates
-    mocks.responses = mocks.responses.filter((mock, index, self) => {
-      return self.findIndex(m => m.exampleUrl === mock.exampleUrl && m.method === mock.method) === index;
+    mocks.mocks = mocks.mocks.filter((mock, index, self) => {
+      return self.findIndex(m => m.request.exampleUrl === mock.request.exampleUrl && m.request.method === mock.request.method) === index;
     });
 
-    console.log(`  Removed ${total - mocks.responses.length} duplicates`);
+    console.log(`  Removed ${total - mocks.mocks.length} duplicates`);
 
     // sort descending by URL length, so that the
     // most specific URLs are matched first
-    mocks.responses.sort((a, b) => b.url.length - a.url.length);
+    mocks.mocks.sort((a, b) => b.request.url.length - a.request.url.length);
 
     fs.writeFileSync(files[fileSet].outputFile, JSON.stringify(mocks, null, 2));
     console.log(`  Saved to ${files[fileSet].outputFile}`);
