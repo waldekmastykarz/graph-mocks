@@ -408,7 +408,12 @@ function convertRequestResponseToProxyMock(requestResponse) {
     },
     response: {
       statusCode: response.statusCode,
-      headers: response.headers
+      headers: response.headers ? Object.getOwnPropertyNames(response.headers).map(headerName => {
+        return {
+          name: headerName,
+          value: response.headers[headerName]
+        }
+      }) : undefined
     }
   };
   if (response.body) {
