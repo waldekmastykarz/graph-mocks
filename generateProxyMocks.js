@@ -7,6 +7,8 @@ const os = require('os');
 require('url');
 const { sanitizeUrl } = require('./sanitizeUrl');
 
+const schemaUrl = 'https://raw.githubusercontent.com/dotnet/dev-proxy/main/schemas/v0.25.0/mockresponseplugin.mocksfile.schema.json';
+
 /**
  * Initializes command line arguments
  * @returns {{docsPath: string, outputFile: string, graphVersion: string}} Object containing command line arguments
@@ -469,6 +471,9 @@ function run() {
           index === proxyMocks.mocks.findIndex(m => m.request.url === mock.request.url && m.request.method === mock.request.method));
 
         const mocksAfterDedupe = proxyMocks.mocks.length;
+
+        // add schema
+        proxyMocks['$schema'] = schemaUrl;
 
         updateProgress();
 
