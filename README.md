@@ -1,6 +1,6 @@
-# Microsoft Graph mocks for Microsoft 365 Developer Proxy
+# Microsoft Graph mocks for Dev Proxy
 
-This repo contains Microsoft Graph mocks for [Microsoft 365 Developer Proxy](https://aka.ms/m365/proxy). Using these mocks, you can simulate calling Microsoft Graph endpoints from your application, without actually calling Microsoft Graph.
+This repo contains Microsoft Graph mocks for [Dev Proxy](https://aka.ms/devproxy). Using these mocks, you can simulate calling Microsoft Graph endpoints from your application, without actually calling Microsoft Graph.
 
 You'll find these mocks helpful if you want:
 
@@ -23,15 +23,15 @@ File|Description
 
 ## Use the mock files
 
-To use any of the mock files, download the file, and then start the Microsoft 365 Developer Proxy passing the path to the downloaded mock file, eg.
+To use any of the mock files, download the file, and then start the Dev Proxy passing the path to the downloaded mock file, eg.
 
 ```sh
 m365proxy --mocks-file ./graph-proxy-mocks-sandbox.json
 ```
 
-When you call a Microsoft Graph endpoint, that's covered by one of the mocks, Microsoft 365 Developer Proxy, will send the corresponding mock response to your application.
+When you call a Microsoft Graph endpoint, that's covered by one of the mocks, Dev Proxy, will send the corresponding mock response to your application.
 
 ## More information
 
-- [Microsoft 365 Developer Proxy](https://aka.ms/m365/proxy)
-- [Mock responses using Microsoft 365 Developer Proxy](https://github.com/microsoft/m365-developer-proxy/wiki/Mock-responses)
+- [Dev Proxy](https://aka.ms/devproxy)
+- [Mock responses using Dev Proxy](https://learn.microsoft.com/microsoft-cloud/dev/dev-proxy/how-to/mock-responses)
