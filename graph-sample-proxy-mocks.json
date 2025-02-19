@@ -1,353 +1,457 @@
 {
-  "responses": [
+  "$schema": "https://raw.githubusercontent.com/dotnet/dev-proxy/main/schemas/v0.25.0/mockresponseplugin.mocksfile.schema.json",
+  "mocks": [
     {
-      "url": "https://graph.microsoft.com/v1.0/users?$select=displayName,id&$filter=identities/any(c: c/issuerAssignedId eq * and c/issuer eq * * *)",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=displayName,id&$filter=identities/any(c:c/issuerAssignedId eq 'j.smith@yahoo.com' and c/issuer eq 'My B2C tenant')",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$select=displayName,id&$filter=identities/any(c: c/issuerAssignedId eq * and c/issuer eq * * *)",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=displayName,id&$filter=identities/any(c:c/issuerAssignedId eq 'j.smith@yahoo.com' and c/issuer eq 'My B2C tenant')",
+        "method": "GET"
       },
-      "responseBody": {
-        "value": [
+      "response": {
+        "statusCode": 200,
+        "headers": [
           {
-            "displayName": "John Smith",
-            "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
+            "name": "Content-type",
+            "value": "application/json"
           }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users?$select=id,displayName,mail,identities&$filter=endswith(userPrincipalName,*)",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=id,displayName,mail,identities&$filter=endsWith(userPrincipalName,'%23EXT%23@contoso.com')&$count=true",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(id,displayName,mail,identities)",
-        "@odata.count": 2,
-        "value": [
-          {
-            "id": "39807bd1-3dde-48f3-8165-81ddd4e46de0",
-            "displayName": "Adele Vance",
-            "mail": "AdeleV@adatum.com",
-            "identities": [
-              {
-                "signInType": "userPrincipalName",
-                "issuer": "contoso.com",
-                "issuerAssignedId": "AdeleV_adatum.com#EXT#@cntoso.com"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:*\" OR \"displayName:*\"&$orderbydisplayName&$count=true",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:wa\" OR \"displayName:ad\"&$orderbydisplayName&$count=true",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
-        "@odata.count": 7,
-        "value": [
-          {
-            "displayName": "Oscar Ward",
-            "givenName": "Oscar",
-            "mail": "oscarward@contoso.com",
-            "userPrincipalName": "oscarward@contoso.com"
-          },
-          {
-            "displayName": "contosoAdmin1",
-            "givenName": "Contoso Administrator",
-            "mail": "'contosoadmin1@fabrikam.com",
-            "userPrincipalName": "contosoadmin1_fabrikam.com#EXT#@microsoft.onmicrosoft.com"
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users?$filter=endswith(mail,*)&$orderby=userPrincipalName&$count=true",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$filter=endswith(mail,'a@contoso.com')&$orderby=userPrincipalName&$count=true",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
-        "@odata.count": 1,
-        "value": [
-          {
-            "displayName": "Grady Archie",
-            "givenName": "Grady",
-            "jobTitle": "Designer",
-            "mail": "GradyA@contoso.com",
-            "userPrincipalName": "GradyA@contoso.com",
-            "id": "e8b753b5-4117-464e-9a08-713e1ff266b3"
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:*\"&$orderby=displayName&$count=true",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:wa\"&$orderby=displayName&$count=true",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
-        "@odata.count": 7,
-        "value": [
-          {
-            "displayName": "Oscar Ward",
-            "givenName": "Oscar",
-            "mail": "oscarward@contoso.com",
-            "userPrincipalName": "oscarward@contoso.com"
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*?$select=displayName,givenName,postalCode,identities",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd?$select=displayName,givenName,postalCode,identities",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(displayName,givenName,postalCode,identities)/$entity",
-        "displayName": "Adele Vance",
-        "givenName": "Adele",
-        "postalCode": "98004",
-        "identities": [
-          {
-            "signInType": "userPrincipalName",
-            "issuer": "contoso.com",
-            "issuerAssignedId": "AdeleV@contoso.com"
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users?$select=displayName,userPrincipalName,signInActivity",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=displayName,userPrincipalName,signInActivity",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(displayName,userPrincipalName,signInActivity)",
-        "value": [
-          {
-            "displayName": "Adele Vance",
-            "userPrincipalName": "AdeleV@contoso.com",
-            "id": "1aecaf40-dc3a-461f-88a8-d06994e12898",
-            "signInActivity": {
-              "lastSignInDateTime": "2021-06-17T16:41:33Z",
-              "lastSignInRequestId": "d4d31c40-4c36-4775-ad59-7d1e6a171f00",
-              "lastNonInteractiveSignInDateTime": "0001-01-01T00:00:00Z",
-              "lastNonInteractiveSignInRequestId": ""
+        ],
+        "body": {
+          "value": [
+            {
+              "displayName": "John Smith",
+              "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
             }
-          },
-          {
-            "displayName": "Alex Wilber",
-            "userPrincipalName": "AlexW@contoso.com",
-            "id": "f0662ee5-84b1-43d6-8338-769cce1bc141",
-            "signInActivity": {
-              "lastSignInDateTime": "2021-07-29T15:53:27Z",
-              "lastSignInRequestId": "f3149ee1-e347-4181-b45b-99a1f82b1c00",
-              "lastNonInteractiveSignInDateTime": "2021-07-29T17:53:42Z",
-              "lastNonInteractiveSignInRequestId": "868efa6a-b2e9-40e9-9b1c-0aaea5b50200"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*?$select=ext55gb1l09_msLearnCourses",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users/4562bcc8-c436-4f95-b7c0-4f8ce89dca5e?$select=ext55gb1l09_msLearnCourses",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(ext55gb1l09_msLearnCourses)/$entity",
-        "ext55gb1l09_msLearnCourses": {
-          "@odata.type": "#microsoft.graph.ComplexExtensionValue",
-          "courseType": "Developer",
-          "courseName": "Introduction to Microsoft Graph",
-          "courseId": 1
+          ]
         }
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/users?$select=ext55gb1l09_msLearnCourses",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=ext55gb1l09_msLearnCourses",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$select=id,displayName,mail,identities&$filter=endswith(userPrincipalName,*)",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=id,displayName,mail,identities&$filter=endsWith(userPrincipalName,'%23EXT%23@contoso.com')&$count=true",
+        "method": "GET"
       },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(ext55gb1l09_msLearnCourses)",
-        "value": [
-          {},
+      "response": {
+        "statusCode": 200,
+        "headers": [
           {
-            "ext55gb1l09_msLearnCourses": {
-              "@odata.type": "#microsoft.graph.ComplexExtensionValue",
-              "courseType": "Developer",
-              "courseName": "Introduction to Microsoft Graph",
-              "courseId": 1
-            }
-          },
-          {}
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users/{user-id}",
-      "method": "DELETE",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "businessPhones": [
-          "+1 425 555 0109"
-        ],
-        "displayName": "Adele Vance",
-        "givenName": "Adele",
-        "jobTitle": "Retail Manager",
-        "mail": "AdeleV@contoso.onmicrosoft.com",
-        "mobilePhone": "+1 425 555 0109",
-        "officeLocation": "18/2111",
-        "preferredLanguage": "en-US",
-        "surname": "Vance",
-        "userPrincipalName": "AdeleV@contoso.onmicrosoft.com",
-        "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users/*",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users/{id}",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users",
-      "method": "POST",
-      "responseCode": 201,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
-        "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
-        "businessPhones": [],
-        "displayName": "Adele Vance",
-        "givenName": "Adele",
-        "jobTitle": "Product Marketing Manager",
-        "mail": "AdeleV@contoso.onmicrosoft.com",
-        "mobilePhone": "+1 425 555 0109",
-        "officeLocation": "18/2111",
-        "preferredLanguage": "en-US",
-        "surname": "Vance",
-        "userPrincipalName": "AdeleV@contoso.onmicrosoft.com"
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/users",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/users",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
-        "value": [
-          {
-            "businessPhones": [],
-            "displayName": "Conf Room Adams",
-            "givenName": null,
-            "jobTitle": null,
-            "mail": "Adams@contoso.com",
-            "mobilePhone": null,
-            "officeLocation": null,
-            "preferredLanguage": null,
-            "surname": null,
-            "userPrincipalName": "Adams@contoso.com",
-            "id": "6ea91a8d-e32e-41a1-b7bd-d2d185eed0e0"
-          },
-          {
-            "businessPhones": [
-              "425-555-0100"
-            ],
-            "displayName": "MOD Administrator",
-            "givenName": "MOD",
-            "jobTitle": null,
-            "mail": null,
-            "mobilePhone": "425-555-0101",
-            "officeLocation": null,
-            "preferredLanguage": "en-US",
-            "surname": "Administrator",
-            "userPrincipalName": "admin@contoso.com",
-            "id": "4562bcc8-c436-4f95-b7c0-4f8ce89dca5e"
+            "name": "Content-type",
+            "value": "application/json"
           }
-        ]
-      }
-    },
-    {
-      "url": "https://graph.microsoft.com/v1.0/me",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/me",
-      "method": "GET",
-      "responseCode": 200,
-      "responseHeaders": {
-        "Content-type": "application/json"
-      },
-      "responseBody": {
-        "businessPhones": [
-          "+1 425 555 0109"
         ],
-        "displayName": "Adele Vance",
-        "givenName": "Adele",
-        "jobTitle": "Retail Manager",
-        "mail": "AdeleV@contoso.onmicrosoft.com",
-        "mobilePhone": "+1 425 555 0109",
-        "officeLocation": "18/2111",
-        "preferredLanguage": "en-US",
-        "surname": "Vance",
-        "userPrincipalName": "AdeleV@contoso.onmicrosoft.com",
-        "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(id,displayName,mail,identities)",
+          "@odata.count": 2,
+          "value": [
+            {
+              "id": "39807bd1-3dde-48f3-8165-81ddd4e46de0",
+              "displayName": "Adele Vance",
+              "mail": "AdeleV@adatum.com",
+              "identities": [
+                {
+                  "signInType": "userPrincipalName",
+                  "issuer": "contoso.com",
+                  "issuerAssignedId": "AdeleV_adatum.com#EXT#@cntoso.com"
+                }
+              ]
+            }
+          ]
+        }
       }
     },
     {
-      "url": "https://graph.microsoft.com/v1.0/me",
-      "exampleUrl": "https://graph.microsoft.com/v1.0/me",
-      "method": "PATCH",
-      "responseCode": 204,
-      "responseHeaders": {}
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:*\" OR \"displayName:*\"&$orderbydisplayName&$count=true",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:wa\" OR \"displayName:ad\"&$orderbydisplayName&$count=true",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
+          "@odata.count": 7,
+          "value": [
+            {
+              "displayName": "Oscar Ward",
+              "givenName": "Oscar",
+              "mail": "oscarward@contoso.com",
+              "userPrincipalName": "oscarward@contoso.com"
+            },
+            {
+              "displayName": "contosoAdmin1",
+              "givenName": "Contoso Administrator",
+              "mail": "'contosoadmin1@fabrikam.com",
+              "userPrincipalName": "contosoadmin1_fabrikam.com#EXT#@microsoft.onmicrosoft.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$filter=endswith(mail,*)&$orderby=userPrincipalName&$count=true",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$filter=endswith(mail,'a@contoso.com')&$orderby=userPrincipalName&$count=true",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
+          "@odata.count": 1,
+          "value": [
+            {
+              "displayName": "Grady Archie",
+              "givenName": "Grady",
+              "jobTitle": "Designer",
+              "mail": "GradyA@contoso.com",
+              "userPrincipalName": "GradyA@contoso.com",
+              "id": "e8b753b5-4117-464e-9a08-713e1ff266b3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:*\"&$orderby=displayName&$count=true",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$search=\"displayName:wa\"&$orderby=displayName&$count=true",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
+          "@odata.count": 7,
+          "value": [
+            {
+              "displayName": "Oscar Ward",
+              "givenName": "Oscar",
+              "mail": "oscarward@contoso.com",
+              "userPrincipalName": "oscarward@contoso.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users/*?$select=displayName,givenName,postalCode,identities",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd?$select=displayName,givenName,postalCode,identities",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(displayName,givenName,postalCode,identities)/$entity",
+          "displayName": "Adele Vance",
+          "givenName": "Adele",
+          "postalCode": "98004",
+          "identities": [
+            {
+              "signInType": "userPrincipalName",
+              "issuer": "contoso.com",
+              "issuerAssignedId": "AdeleV@contoso.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$select=displayName,userPrincipalName,signInActivity",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=displayName,userPrincipalName,signInActivity",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(displayName,userPrincipalName,signInActivity)",
+          "value": [
+            {
+              "displayName": "Adele Vance",
+              "userPrincipalName": "AdeleV@contoso.com",
+              "id": "1aecaf40-dc3a-461f-88a8-d06994e12898",
+              "signInActivity": {
+                "lastSignInDateTime": "2021-06-17T16:41:33Z",
+                "lastSignInRequestId": "d4d31c40-4c36-4775-ad59-7d1e6a171f00",
+                "lastNonInteractiveSignInDateTime": "0001-01-01T00:00:00Z",
+                "lastNonInteractiveSignInRequestId": ""
+              }
+            },
+            {
+              "displayName": "Alex Wilber",
+              "userPrincipalName": "AlexW@contoso.com",
+              "id": "f0662ee5-84b1-43d6-8338-769cce1bc141",
+              "signInActivity": {
+                "lastSignInDateTime": "2021-07-29T15:53:27Z",
+                "lastSignInRequestId": "f3149ee1-e347-4181-b45b-99a1f82b1c00",
+                "lastNonInteractiveSignInDateTime": "2021-07-29T17:53:42Z",
+                "lastNonInteractiveSignInRequestId": "868efa6a-b2e9-40e9-9b1c-0aaea5b50200"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users/*?$select=ext55gb1l09_msLearnCourses",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users/4562bcc8-c436-4f95-b7c0-4f8ce89dca5e?$select=ext55gb1l09_msLearnCourses",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(ext55gb1l09_msLearnCourses)/$entity",
+          "ext55gb1l09_msLearnCourses": {
+            "@odata.type": "#microsoft.graph.ComplexExtensionValue",
+            "courseType": "Developer",
+            "courseName": "Introduction to Microsoft Graph",
+            "courseId": 1
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users?$select=ext55gb1l09_msLearnCourses",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users?$select=ext55gb1l09_msLearnCourses",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(ext55gb1l09_msLearnCourses)",
+          "value": [
+            {},
+            {
+              "ext55gb1l09_msLearnCourses": {
+                "@odata.type": "#microsoft.graph.ComplexExtensionValue",
+                "courseType": "Developer",
+                "courseName": "Introduction to Microsoft Graph",
+                "courseId": 1
+              }
+            },
+            {}
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users/*",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users/{user-id}",
+        "method": "DELETE"
+      },
+      "response": {
+        "statusCode": 204,
+        "headers": []
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users/*",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "businessPhones": [
+            "+1 425 555 0109"
+          ],
+          "displayName": "Adele Vance",
+          "givenName": "Adele",
+          "jobTitle": "Retail Manager",
+          "mail": "AdeleV@contoso.onmicrosoft.com",
+          "mobilePhone": "+1 425 555 0109",
+          "officeLocation": "18/2111",
+          "preferredLanguage": "en-US",
+          "surname": "Vance",
+          "userPrincipalName": "AdeleV@contoso.onmicrosoft.com",
+          "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users/*",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users/{id}",
+        "method": "PATCH"
+      },
+      "response": {
+        "statusCode": 204,
+        "headers": []
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users",
+        "method": "POST"
+      },
+      "response": {
+        "statusCode": 201,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+          "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+          "businessPhones": [],
+          "displayName": "Adele Vance",
+          "givenName": "Adele",
+          "jobTitle": "Product Marketing Manager",
+          "mail": "AdeleV@contoso.onmicrosoft.com",
+          "mobilePhone": "+1 425 555 0109",
+          "officeLocation": "18/2111",
+          "preferredLanguage": "en-US",
+          "surname": "Vance",
+          "userPrincipalName": "AdeleV@contoso.onmicrosoft.com"
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/users",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/users",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users",
+          "value": [
+            {
+              "businessPhones": [],
+              "displayName": "Conf Room Adams",
+              "givenName": null,
+              "jobTitle": null,
+              "mail": "Adams@contoso.com",
+              "mobilePhone": null,
+              "officeLocation": null,
+              "preferredLanguage": null,
+              "surname": null,
+              "userPrincipalName": "Adams@contoso.com",
+              "id": "6ea91a8d-e32e-41a1-b7bd-d2d185eed0e0"
+            },
+            {
+              "businessPhones": [
+                "425-555-0100"
+              ],
+              "displayName": "MOD Administrator",
+              "givenName": "MOD",
+              "jobTitle": null,
+              "mail": null,
+              "mobilePhone": "425-555-0101",
+              "officeLocation": null,
+              "preferredLanguage": "en-US",
+              "surname": "Administrator",
+              "userPrincipalName": "admin@contoso.com",
+              "id": "4562bcc8-c436-4f95-b7c0-4f8ce89dca5e"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/me",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/me",
+        "method": "GET"
+      },
+      "response": {
+        "statusCode": 200,
+        "headers": [
+          {
+            "name": "Content-type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "businessPhones": [
+            "+1 425 555 0109"
+          ],
+          "displayName": "Adele Vance",
+          "givenName": "Adele",
+          "jobTitle": "Retail Manager",
+          "mail": "AdeleV@contoso.onmicrosoft.com",
+          "mobilePhone": "+1 425 555 0109",
+          "officeLocation": "18/2111",
+          "preferredLanguage": "en-US",
+          "surname": "Vance",
+          "userPrincipalName": "AdeleV@contoso.onmicrosoft.com",
+          "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd"
+        }
+      }
+    },
+    {
+      "request": {
+        "url": "https://graph.microsoft.com/v1.0/me",
+        "exampleUrl": "https://graph.microsoft.com/v1.0/me",
+        "method": "PATCH"
+      },
+      "response": {
+        "statusCode": 204,
+        "headers": []
+      }
     }
   ]
 }
