@@ -1,5 +1,7 @@
 # Microsoft Graph mocks for Dev Proxy
 
+**This is a working repo for Microsoft Graph mocks for [Dev Proxy](https://aka.ms/devproxy). Download the ready-to-use sample from the [sample gallery](https://adoption.microsoft.com/en-us/sample-solution-gallery/?keyword=%22Graph%20API%20docs%22&sort-by=updateDateTime-true&page=1&product=Dev%20Proxy).**
+
 This repo contains Microsoft Graph mocks for [Dev Proxy](https://aka.ms/devproxy). Using these mocks, you can simulate calling Microsoft Graph endpoints from your application, without actually calling Microsoft Graph.
 
 You'll find these mocks helpful if you want:
